@@ -1,0 +1,69 @@
+{
+  BodyDef : {
+    fixedRotation: true,
+    type: DynamicBody,
+    gravityScale: 1,
+    bullet: false
+  },
+  Fixtures : [
+    {
+      description: torso,
+      isSensor: false,
+      type: PolygonShape,
+      width: 15,
+      height: 30,
+      density: 1,
+      friction: 1,
+      restitution: 0,
+      x: 0,
+      y: 3
+    },
+    {
+      description: head,
+      isSensor: false,
+      type: CircleShape,
+      radius: 13,
+      density: 1,
+      friction: 1,
+      restitution: 0,
+      x: 1,
+      y: 43
+    },
+    {
+      description: footSensor,
+      isSensor: true,
+      bitShifts: 3,
+      type: PolygonShape,
+      width: 14,
+      height: 2,
+      density: 0.00001,
+      restitution: 0,
+      x: 0,
+      y: -30
+    },
+    {
+      description: rightWallSensor,
+      isSensor: true,
+      bitShifts: 4,
+      type: PolygonShape,
+      width: 4,
+      height: 28,
+      density: 0.00001,
+      restitution: 0,
+      x: 15,
+      y: 0
+    },
+    {
+      description: leftWallSensor,
+      isSensor: true,
+      bitShifts: 5,
+      type: PolygonShape,
+      width: 4,
+      height: 28,
+      density: 0.00001,
+      restitution: 0,
+      x: -15,
+      y: 0
+    }
+  ]
+}

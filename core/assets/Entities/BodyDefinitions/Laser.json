@@ -1,0 +1,23 @@
+{
+  BodyDef : {
+    fixedRotation: true,
+    type: DynamicBody,
+    gravityScale: 0,
+    bullet: true
+  },
+  Fixtures : [
+    {
+      description: laser,
+      isSensor: false,
+      isBullet: true,
+      type: PolygonShape,
+      width: 20,
+      height: 2.5,
+      density: 0.01,
+      friction: 0,
+      restitution: 0,
+      x: 0,
+      y: 0
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="60" height="60" tilewidth="50" tileheight="50" backgroundcolor="#000000">
+ <tileset firstgid="1" name="PngOutTest" tilewidth="50" tileheight="50">
+  <image source="pngouttest.png" width="350" height="200"/>
+  <tile id="14">
+   <properties>
+    <property name="shape" value="isolated"/>
+   </properties>
+   <objectgroup draworder="index"/>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="shape" value="nondiagonaldown"/>
+   </properties>
+   <objectgroup draworder="index"/>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="shape" value="nondiagonalup"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="shape" value="nondiagonalleft"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="shape" value="nondiagonalright"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="shape" value="diagonalupleft"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="shape" value="diagonalupright"/>
+   </properties>
+  </tile>
+  <tile id="21">
+   <properties>
+    <property name="shape" value="noedge"/>
+   </properties>
+  </tile>
+  <tile id="22">
+   <properties>
+    <property name="shape" value="uprightcorner"/>
+   </properties>
+  </tile>
+  <tile id="23">
+   <properties>
+    <property name="shape" value="downrightcorner"/>
+   </properties>
+  </tile>
+  <tile id="24">
+   <properties>
+    <property name="shape" value="downleftcorner"/>
+   </properties>
+  </tile>
+  <tile id="25">
+   <properties>
+    <property name="shape" value="upleftcorner"/>
+   </properties>
+  </tile>
+  <tile id="26">
+   <properties>
+    <property name="shape" value="diagonaldownleft"/>
+   </properties>
+  </tile>
+  <tile id="27">
+   <properties>
+    <property name="shape" value="diagonaldownright"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="29" name="Spawn" tilewidth="50" tileheight="50">
+  <image source="spawn.png" width="100" height="50"/>
+ </tileset>
+ <tileset firstgid="31" name="PaddingTest" tilewidth="48" tileheight="48" spacing="2" margin="2">
+  <image source="spawn.png" width="100" height="50"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt2N0OgjAMBeAmeMGdCoqKvv9z6uIWm2YdJDBW3GlyIuNn2ZchLLRE1NK32j9PDUYEQerNKWNK22Re9KvGZ05NnRuOPz8ZWEpa+8T4m0Q0m3a8M2AN3jC+mFWrlO/gw/u16JWelG3qGtnuDFi5V5svzcB/5fbBuDflkibNHbuOt615tfHKY3N8sbm34nU5i9z8GEfRJrE/Fn7ukW1b8bpnplwf3P0YH6JNYr+M64v/P8Lcjgac2v28pDqlPytzm8Pr+uT3tKW5zeXtxb5hQeC15eXPLHjhhXc/3tj6RFubTGUP3jWLfxOpwesqx7oMXjsFL7zwwsvj3m/XLREz60J51hvhna59jyqVXOurJWvbLVKTFV544YV3T2Z44YUXXnhtBl544YUXXntZ24ogCGIpoUqPI3felVqRzg==
+  </data>
+ </layer>
+ <objectgroup name="CollisionLayer">
+  <object x="1450" y="851" width="149" height="398"/>
+  <object x="1150" y="700" width="398" height="98"/>
+  <object x="1450" y="796" width="98" height="61"/>
+  <object x="1651" y="701" width="47" height="47"/>
+  <object x="852" y="703" width="143" height="93"/>
+  <object x="343" y="703" width="455" height="95"/>
+  <object x="344" y="339" width="205" height="369"/>
+  <object x="1803" y="341" width="76" height="517"/>
+  <object x="1751" y="751" width="171" height="268"/>
+  <object x="1699" y="851" width="315" height="397"/>
+  <object x="1796" y="1037" width="945" height="211"/>
+  <object x="2448" y="1206" width="181" height="584"/>
+  <object x="545" y="1702" width="1973" height="88"/>
+  <object x="341" y="793" width="207" height="928"/>
+  <object x="605" y="1701">
+   <polygon points="0,0 -79,-77 -94,81"/>
+  </object>
+  <object x="2382" y="1707">
+   <polygon points="0,0 86,-77 139,40"/>
+  </object>
+  <object x="2454" y="1301">
+   <polygon points="0,0 -72,-72 82,-88"/>
+  </object>
+  <object x="1810" y="409">
+   <polygon points="0,0 -84,-81 15,-98"/>
+  </object>
+  <object x="621" y="337">
+   <polygon points="0,0 -96,86 -110,-18"/>
+  </object>
+  <object x="1293" y="550" width="53" height="158"/>
+  <object x="640" y="550" width="158" height="46"/>
+  <object x="800" y="450" width="48" height="100"/>
+  <object x="850" y="400" width="349" height="49"/>
+ </objectgroup>
+ <objectgroup name="Lighting"/>
+ <objectgroup name="SpawnPoints">
+  <object gid="29" x="710" y="543">
+   <properties>
+    <property name="toSpawn" value="Player"/>
+   </properties>
+  </object>
+  <object gid="30" x="1383" y="699">
+   <properties>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1011" y="1701">
+   <properties>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

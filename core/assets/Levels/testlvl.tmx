@@ -83,14 +83,13 @@
  </tileset>
  <layer name="Tile Layer 1" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJzt2N0OgjAMBeAmeMGdCoqKvv9z6uIWm2YdJDBW3GlyIuNn2ZchLLRE1NK32j9PDUYEQerNKWNK22Re9KvGZ05NnRuOPz8ZWEpa+8T4m0Q0m3a8M2AN3jC+mFWrlO/gw/u16JWelG3qGtnuDFi5V5svzcB/5fbBuDflkibNHbuOt615tfHKY3N8sbm34nU5i9z8GEfRJrE/Fn7ukW1b8bpnplwf3P0YH6JNYr+M64v/P8Lcjgac2v28pDqlPytzm8Pr+uT3tKW5zeXtxb5hQeC15eXPLHjhhXc/3tj6RFubTGUP3jWLfxOpwesqx7oMXjsFL7zwwsvj3m/XLREz60J51hvhna59jyqVXOurJWvbLVKTFV544YV3T2Z44YUXXnhtBl544YUXXntZ24ogCGIpoUqPI3felVqRzg==
+   eJztmNsOgjAQRJf4wpuKd/T/v1Mb27iZdIUEaheZSU6ESpoet8KGVkRaeaf9c9bgSAhZL7uC1HZDHvLJJjImeG1jfH9/cVbUdD0MrN8iF2s8pHPgmnyTo3YdU+cGPq1snPriGrXXtzoP+Ur0re2qfRHtajk1cIx7Xc/jyRfXhudYy5xn7jfQ83jzzXnmMrR3sb7efAN74BLX2MO5wHgOfe1WHXvxDfdM7A+ucY03OBcYR8Jc+v+Rats78LT285R0xnxealvCN8yp97Sn2pbyPcDYeQL09eWr71n0pS99l+Ob60+s3mSIJfjOGf1OZA2+ISX6Mvr6CX3pS1/6asLz7fRLiZE5Spl+Iz3TrfdRtSjVX03pbX/BmlzpS1/60ndJzvSlL33pS1+f0Je+9KUvff0xtyshhHgipfY6SvMEz8SRbA==
   </data>
  </layer>
  <objectgroup name="CollisionLayer">
   <object x="1450" y="851" width="149" height="398"/>
   <object x="1150" y="700" width="398" height="98"/>
   <object x="1450" y="796" width="98" height="61"/>
-  <object x="1651" y="701" width="47" height="47"/>
   <object x="852" y="703" width="143" height="93"/>
   <object x="343" y="703" width="455" height="95"/>
   <object x="344" y="339" width="205" height="369"/>
@@ -116,25 +115,23 @@
   <object x="621" y="337">
    <polygon points="0,0 -96,86 -110,-18"/>
   </object>
-  <object x="1293" y="550" width="53" height="158"/>
-  <object x="640" y="550" width="158" height="46"/>
-  <object x="800" y="450" width="48" height="100"/>
-  <object x="850" y="400" width="349" height="49"/>
  </objectgroup>
  <objectgroup name="Lighting"/>
  <objectgroup name="SpawnPoints">
-  <object gid="29" x="710" y="543">
+  <object gid="29" x="1247" y="699">
    <properties>
     <property name="toSpawn" value="Player"/>
    </properties>
   </object>
-  <object gid="30" x="1383" y="699">
+  <object gid="30" x="1500" y="530">
    <properties>
+    <property name="steering" value="FlyingSteering"/>
     <property name="toSpawn" value="Basic"/>
    </properties>
   </object>
   <object gid="30" x="1011" y="1701">
    <properties>
+    <property name="steering" value="FlyingSteering"/>
     <property name="toSpawn" value="Basic"/>
    </properties>
   </object>

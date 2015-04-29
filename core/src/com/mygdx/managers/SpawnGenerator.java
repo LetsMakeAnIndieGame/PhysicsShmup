@@ -3,20 +3,18 @@ package com.mygdx.managers;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.actors.EnemyAgentComponent;
-import com.mygdx.game.actors.PlayerAgent;
-import com.mygdx.game.actors.TestEnemySteering;
-import com.mygdx.game.actors.TestPlayerSteering;
+import com.mygdx.game.actors.*;
 import com.mygdx.game.components.*;
 import com.mygdx.game.components.collision.EnemyCollisionComponent;
 import com.mygdx.game.components.collision.PlayerCollisionComponent;
 import com.mygdx.game.components.collision.TypeComponent;
+import com.mygdx.game.components.fsm.EnemyAgentComponent;
+import com.mygdx.game.components.fsm.PlayerAgent;
 import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.physics.BodyComponent;
@@ -114,6 +112,7 @@ public class SpawnGenerator {
             MapObject object = objectIterator.next();
 
             if (object.getProperties().get("toSpawn", String.class).equalsIgnoreCase("Basic")) {
+                String steeringFile = object.getProperties().get("steering", String.class);
                 int spawnPointX = object.getProperties().get("x", float.class).intValue();
                 int spawnPointY = object.getProperties().get("y", float.class).intValue();
 
@@ -126,19 +125,21 @@ public class SpawnGenerator {
                 TypeComponent typeComponent = new TypeComponent(PhysicsManager.COL_ENEMY);
                 PositionComponent positionComponent = new PositionComponent(spawnPointX, spawnPointY, RenderPriority.MID);
                 VelocityComponent velocityComponent = new VelocityComponent(0f, 0f);
-                SpriteComponent spriteComponent = new SpriteComponent(new Texture("Entities/Actors/player.png"));
+                SpriteComponent spriteComponent = new SpriteComponent(new Texture("Entities/Actors/bird.png"));
                 BodyComponent bodyComponent = new BodyComponent(positionComponent,
                         BodyGenerator.generateBody(enemy,
                                 spriteComponent.sprites.get(0),
                                 Gdx.files.internal("Entities/BodyDefinitions/EnemyBody.json"),
                                 PhysicsManager.ENEMY_BITS));
-                spriteComponent.sprites.get(0).setColor(1, 0, 0, 1);
 
                 enemy.add(typeComponent).add(positionComponent).add(spriteComponent).add(bodyComponent)
                         .add(sensorColComp2).add(renderableComponent).add(enemyColCom).add(enemyDataCom)
                         .add(velocityComponent);
-                TestEnemySteering enemySteering = new TestEnemySteering(enemy, EntityManager.getPlayerSteering());
-                EnemyAgentComponent enemyAgentComponent = new EnemyAgentComponent(enemy, enemySteering);
+                Steering enemySteering = SteeringBuilder.createSteering(steeringFile+".json", enemy);
+                enemySteering.setMaxLinearAcceleration(0.25f);
+                enemySteering.setMaxLinearSpeed(2f);
+                enemySteering.setMinLinearSpeed(0.0001f);
+                FlyingTestEnemyComponent enemyAgentComponent = new FlyingTestEnemyComponent(enemy, enemySteering);
                 enemy.add(enemyAgentComponent);
 
                 EntityManager.add(enemyAgentComponent);

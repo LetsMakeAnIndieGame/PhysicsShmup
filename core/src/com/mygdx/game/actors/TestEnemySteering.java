@@ -31,23 +31,22 @@ public class TestEnemySteering implements Steerable<Vector2>, Updateable {
     private static final SteeringAcceleration<Vector2> steeringOutput =
             new SteeringAcceleration<Vector2>(new Vector2(10, 1));
 
-    Vector2 position;
-    Vector2 linearVelocity;
-    float orientation;
-    float angularVelocity;
+    private Vector2 position;
+    private Vector2 linearVelocity;
+    private float orientation;
+    private float angularVelocity;
 
-    float maxLinearSpeed;
-    float maxLinearAcceleration;
-    float maxAngularSpeed;
-    float maxAngularAcceleration;
+    private float maxLinearSpeed;
+    private float maxLinearAcceleration;
+    private float maxAngularSpeed;
+    private float maxAngularAcceleration;
 
-    boolean independentFacing;
-    BodyComponent bodyCom;
-    Entity entity;
-//    TestEnemySteering target;
-    Steerable<Vector2> target;
+    private boolean independentFacing;
+    private BodyComponent bodyCom;
+    private Entity entity;
+    private Steerable<Vector2> target;
 
-    SteeringBehavior<Vector2> steeringBehavior;
+    private SteeringBehavior<Vector2> steeringBehavior;
 
     public TestEnemySteering(Vector2 position) {
         this.position = position;

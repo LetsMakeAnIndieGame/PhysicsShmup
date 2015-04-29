@@ -1,3 +1,7 @@
 {
-
+  type: airborn,
+  maxLinearSpeed: 15,
+  maxLinearAcceleration: 1,
+  maxAngularSpeed: 3,
+  maxAngularAcceleration: 3
 }

@@ -7,7 +7,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.actors.Collidable;
-import com.mygdx.game.actors.EnemyAgentComponent;
+import com.mygdx.game.components.fsm.EnemyAgentComponent;
 import com.mygdx.game.components.*;
 import com.mygdx.game.components.graphics.BitmapFontComponent;
 import com.mygdx.game.components.graphics.RenderableComponent;

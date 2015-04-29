@@ -12,10 +12,6 @@ public class Node implements IndexedNode<Node> {
     public int type;
     public int index;
 
-    public Node() {
-        index = Node.Indexer.getIndex();
-    }
-
     @Override
     public int getIndex() {
         return index;
@@ -28,14 +24,6 @@ public class Node implements IndexedNode<Node> {
 
     public void createConnection(Node toNode, float cost) {
         connections.add(new ConnectionImp(this, toNode, cost));
-    }
-
-    private static class Indexer {
-        private static int index = 0;
-
-        public static int getIndex() {
-            return index++;
-        }
     }
 
     public static class Type {

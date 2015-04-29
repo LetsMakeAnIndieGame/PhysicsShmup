@@ -2,7 +2,7 @@
   BodyDef : {
     fixedRotation: true,
     type: DynamicBody,
-    gravityScale: 1,
+    gravityScale: 0,
     bullet: false
   },
   Fixtures : [

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.mygdx.game.PhysicsShmup;
+import com.mygdx.game.components.fsm.PlayerAgent;
 import com.mygdx.managers.PhysicsManager;
 
 /**

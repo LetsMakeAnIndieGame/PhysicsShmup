@@ -12,10 +12,11 @@ import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.Flee;
-import com.mygdx.game.pathfinding.GraphPathImp;
-import com.mygdx.game.pathfinding.HeuristicImp;
-import com.mygdx.game.pathfinding.Node;
-import com.mygdx.game.pathfinding.PathfindingDebugger;
+import com.badlogic.gdx.ai.steer.behaviors.Seek;
+import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.components.physics.PositionComponent;
+import com.mygdx.game.pathfinding.*;
+import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.LevelManager;
 import com.mygdx.managers.Messages;
 
@@ -28,49 +29,56 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
     public boolean isShot = false;
 
     private Entity entity;
-    private TestEnemySteering testEnemySteering;
+    private Steering steering;
+    private Steering waypoint;
 
     private IndexedAStarPathFinder<Node> pathFinder;
     private GraphPathImp resultPath = new GraphPathImp();
 
-    public FlyingTestEnemyComponent(Entity entity, TestEnemySteering testEnemySteering) {
+    public FlyingTestEnemyComponent(Entity entity, Steering steering) {
         this.entity = entity;
-        this.testEnemySteering = testEnemySteering;
+        this.steering = steering;
         stateMachine = new DefaultStateMachine<FlyingTestEnemyComponent>(this, FlyingEnemyState.SEEKING);
         MessageManager.getInstance().addListener(this, Messages.PLAYER_ATTACKED_ENEMY);
 
-        pathFinder = new IndexedAStarPathFinder<Node>(LevelManager.graph, false);
+        pathFinder = new IndexedAStarPathFinder<Node>(LevelManager.airGraph, false);
 
-        int startX = (int) testEnemySteering.getPosition().x;
-        int startY = (int) testEnemySteering.getPosition().y;
+        int startX = (int) steering.getPosition().x;
+        int startY = (int) steering.getPosition().y;
 
-        int endX = (int) testEnemySteering.target.getPosition().x;
-        int endY = (int) testEnemySteering.target.getPosition().y;
+        Entity player = EntityManager.getPlayer();
+        PositionComponent playerPos = player.getComponent(PositionComponent.class);
+        int endX = (int) playerPos.x;
+        int endY = (int) playerPos.y;
 
-        Node startNode = LevelManager.graph.getNodeByXY(startX, startY);
-        Node endNode = LevelManager.graph.getNodeByXY(endX, endY);
+        Node startNode = LevelManager.airGraph.getNodeByXY(startX, startY);
+        Node endNode = LevelManager.airGraph.getNodeByXY(endX, endY);
 
-        pathFinder.searchNodePath(startNode, endNode, new HeuristicImp(), resultPath);
+        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
 
-        Gdx.app.log("Path length", "" + resultPath.getCount());
+        try {
+            int waypointIndex = resultPath.get(0).getIndex();
+            waypoint = new PointSteering(new Vector2(waypointIndex % LevelManager.lvlTileWidth * LevelManager.tilePixelWidth + 25, waypointIndex / LevelManager.lvlTileWidth * LevelManager.tilePixelHeight + 25));
+            steering.setTarget(waypoint);
+        } catch(Exception e) {
+            //do nothing
+        }
     }
 
     public void update(float delta) {
         stateMachine.update();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
-            resultPath.clear();
-
-            int startX = (int) testEnemySteering.getPosition().x;
-            int startY = (int) testEnemySteering.getPosition().y;
-
-            int endX = (int) testEnemySteering.target.getPosition().x;
-            int endY = (int) testEnemySteering.target.getPosition().y;
-
-            Node startNode = LevelManager.graph.getNodeByXY(startX, startY);
-            Node endNode = LevelManager.graph.getNodeByXY(endX, endY);
-
-            pathFinder.searchNodePath(startNode, endNode, new HeuristicImp(), resultPath);
+        // Change this to time based
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P) && steering.getLinearVelocity().x == 0 && steering.getLinearVelocity().y == 0) {
+            try {
+                resultPath.removeIndex(0);
+                int waypointIndex = resultPath.get(0).getIndex();
+                waypoint = new PointSteering(new Vector2(waypointIndex % LevelManager.lvlTileWidth * LevelManager.tilePixelWidth + 25, waypointIndex / LevelManager.lvlTileWidth * LevelManager.tilePixelHeight + 25));
+                steering.setTarget(waypoint);
+                steering.setSteeringBehavior(Arrive.class);
+            } catch(Exception e) {
+                // do nothing
+            }
         }
 
         PathfindingDebugger.drawPath(resultPath);
@@ -78,7 +86,7 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
 
     public void startSeeking() {
 
-        testEnemySteering.setSteeringBehavior(Arrive.class);
+        steering.setSteeringBehavior(Arrive.class);
     }
 
     @Override
@@ -93,6 +101,6 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
     }
 
     public void startRetreating() {
-        testEnemySteering.setSteeringBehavior(Flee.class);
+        steering.setSteeringBehavior(Flee.class);
     }
 }

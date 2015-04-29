@@ -96,7 +96,7 @@ public class EntityManager {
             try {
                 world.destroyBody(entity.getComponent(BodyComponent.class).body);
             } catch(Exception e) {
-                //do nothing
+            //do nothing
             }
             engine.removeEntity(entity);
         }

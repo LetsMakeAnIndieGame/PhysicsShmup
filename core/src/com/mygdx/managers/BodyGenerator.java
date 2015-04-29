@@ -33,9 +33,9 @@ public class BodyGenerator {
     public static Body bodyHelper(Entity owner, Vector2 position, Vector2 dimensions, FileHandle handle, short filterCategory) {
         Body body;
 
-        String     rawJson        = handle.readString();
-        JsonReader jsonReader = new JsonReader();
-        JsonValue  root        = jsonReader.parse(rawJson);
+        String     rawJson      = handle.readString();
+        JsonReader jsonReader   = new JsonReader();
+        JsonValue  root         = jsonReader.parse(rawJson);
 
         short maskingBits = (short) ((PhysicsManager.FRIENDLY_BITS | PhysicsManager.ENEMY_BITS | PhysicsManager.NEUTRAL_BITS | PhysicsManager.LEVEL_BITS) ^ filterCategory);
 

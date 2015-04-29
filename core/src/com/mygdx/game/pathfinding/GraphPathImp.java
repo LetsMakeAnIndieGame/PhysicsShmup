@@ -12,8 +12,7 @@ import java.util.Iterator;
 public class GraphPathImp implements GraphPath<Node> {
     private Array<Node> nodes = new Array<Node>();
 
-    public GraphPathImp() {
-    }
+    public GraphPathImp() {}
 
     @Override
     public Iterator<Node> iterator() {
@@ -28,6 +27,10 @@ public class GraphPathImp implements GraphPath<Node> {
     @Override
     public Node get(int i) {
         return nodes.get(i);
+    }
+
+    public Node removeIndex(int index) {
+        return nodes.removeIndex(index);
     }
 
     @Override

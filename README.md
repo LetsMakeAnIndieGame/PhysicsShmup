@@ -1,11 +1,11 @@
 # PhysicsShmup
 
-This code is for educational purposes.  You can use it in your own projects, just don't cheat and use this code
-to try and replicate my project and screw me over, please.  But generally, none of this code here is proprietary,
+This code is for educational purposes.  You can use it in your own projects.  Generally, none of this code here is proprietary,
 meaning it's written broadly enough to be used in a wide variety of projects.  
 
-What is this project?  It's a 2D side-scrolling shmup indie game that I (one person) am working on with LibGDX.  The intent is 
-to sell this game on Steam, so at some point I will stop uploading code when it becomes proprietary-ish, but I figured since 
+What is this project?  It's a 2D side-scrolling shmup indie game that I (one person) started on with LibGDX.  This project is NOW OPEN TO PULL REQUESTS.  Previously, I did not allow pull requests, but anyone who wants to contribute it welcome.
+
+The intent is to have this be a community game and MAYBE sell it on Steam if I ever finish a version of it.  I figured since 
 there aren't a lot of advanced tutorials on LibGDX around the web I'd put my code up here to help other developers 
 learn along with me.
 
@@ -18,6 +18,7 @@ Topics covered in this project for tutorial purposes are:
 - Box2D (Physics)
 - Steering Behaviors
 - AI in general
+- Multithreading
 - And much more
 
 I'm fairly busy, since I have a full-time job and other obligations and this is just my hobby.  Updates may be slow at times.

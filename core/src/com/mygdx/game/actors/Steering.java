@@ -170,11 +170,6 @@ public abstract class Steering implements Steerable<Vector2>, Updateable {
     }
 
     @Override
-    public Vector2 newVector() {
-        return null;
-    }
-
-    @Override
     public float getMaxLinearSpeed() {
         return maxLinearSpeed;
     }

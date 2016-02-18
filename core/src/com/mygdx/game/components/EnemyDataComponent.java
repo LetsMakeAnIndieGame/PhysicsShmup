@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Created by Phil on 2/19/2015.
  */
-public class EnemyDataComponent extends Component {
+public class EnemyDataComponent implements Component {
     public long level = 1;
     public long health = 100;
     public long maxHealth = 100;

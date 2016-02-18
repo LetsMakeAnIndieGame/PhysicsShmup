@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 /**
  * Created by Phil on 2/9/2015.
  */
-public class AttachedComponent extends Component {
+public class AttachedComponent implements Component {
     public Entity attachedTo;
 
     public AttachedComponent(Entity attachedTo) {

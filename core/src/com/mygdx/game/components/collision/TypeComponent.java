@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Created by Phil on 2/16/2015.
  */
-public class TypeComponent extends Component {
+public class TypeComponent implements Component {
     public short type;
 
     public TypeComponent(short type) {

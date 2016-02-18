@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Created by Phil on 2/21/2015.
  */
-public class TransparentComponent extends Component {
+public class TransparentComponent implements Component {
     public float transparency = 1;
 
     public TransparentComponent(float transparency) {

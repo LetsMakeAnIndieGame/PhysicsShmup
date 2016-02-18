@@ -3,6 +3,7 @@ package com.mygdx.game.actors;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
+import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.managers.PhysicsManager;
@@ -51,5 +52,25 @@ public class GroundSteering extends Steering implements Steerable<Vector2>, Upda
                 this.orientation = newOrientation;
             }
         }
+    }
+
+    @Override
+    public float getZeroLinearSpeedThreshold() {
+        return 0;
+    }
+
+    @Override
+    public void setZeroLinearSpeedThreshold(float value) {
+
+    }
+
+    @Override
+    public void setOrientation(float orientation) {
+
+    }
+
+    @Override
+    public Location<Vector2> newLocation() {
+        return null;
     }
 }

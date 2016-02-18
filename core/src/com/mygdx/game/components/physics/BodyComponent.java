@@ -7,7 +7,7 @@ import com.mygdx.managers.PhysicsManager;
 /**
  * Created by Phil on 2/8/2015.
  */
-public class BodyComponent extends Component {
+public class BodyComponent implements Component {
     public Body body;
 
     public BodyComponent(PositionComponent positionCom, Body body) {

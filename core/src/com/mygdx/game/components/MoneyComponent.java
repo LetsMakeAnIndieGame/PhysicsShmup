@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Created by Phil on 2/16/2015.
  */
-public class MoneyComponent extends Component {
+public class MoneyComponent implements Component {
     public int value = 100;
 
     public MoneyComponent() {}

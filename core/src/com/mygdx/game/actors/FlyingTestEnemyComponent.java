@@ -23,7 +23,7 @@ import com.mygdx.managers.Messages;
 /**
  * Created by Phil on 4/11/2015.
  */
-public class FlyingTestEnemyComponent extends Component implements Telegraph, Updateable {
+public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable {
     public StateMachine<FlyingTestEnemyComponent> stateMachine;
 
     public boolean isShot = false;

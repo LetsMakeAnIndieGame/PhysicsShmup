@@ -1,10 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.pfa.indexed.DefaultIndexedGraph;
@@ -32,6 +29,10 @@ import com.mygdx.game.pathfinding.PathfindingDebugger;
 import com.mygdx.game.systems.CollisionManager;
 import com.mygdx.managers.*;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 public class PhysicsShmup extends ApplicationAdapter {
 	public static long currentTimeMillis;
 
@@ -52,6 +53,9 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	@Override
 	public void create () {
+        ThreadPoolExecutor execServ = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+
+//        execServ.`
         LevelManager.loadLevel("Levels/testlvl.tmx");
 		Gdx.input.setCursorCatched(true); // remove mouse cursor
 		Engine engine = new Engine();
@@ -96,6 +100,7 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+        Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond());
 		currentTimeMillis = System.currentTimeMillis();
 
         MessageManager.getInstance().update(Gdx.graphics.getRawDeltaTime());
@@ -137,8 +142,10 @@ public class PhysicsShmup extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE))
 			Gdx.app.exit();
 
-		if (Gdx.input.isKeyJustPressed(Input.Keys.F11))
-			Gdx.graphics.setDisplayMode(1920, 1080, true);
+		if (Gdx.input.isKeyJustPressed(Input.Keys.F11)) {
+//			Gdx.graphics.setWindowedMode(1920, 1080);
+			Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+		}
 	}
 
 	@Override

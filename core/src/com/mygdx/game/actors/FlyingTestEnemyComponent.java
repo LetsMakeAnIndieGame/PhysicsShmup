@@ -27,6 +27,7 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
     public StateMachine<FlyingTestEnemyComponent> stateMachine;
 
     public boolean isShot = false;
+    public ThreadTest threadTest = new ThreadTest();
 
     private Entity entity;
     private Steering steering;
@@ -34,6 +35,10 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
 
     private IndexedAStarPathFinder<Node> pathFinder;
     private GraphPathImp resultPath = new GraphPathImp();
+
+    // delete these
+    private Node startNode;
+    private Node endNode;
 
     public FlyingTestEnemyComponent(Entity entity, Steering steering) {
         this.entity = entity;
@@ -51,10 +56,12 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
         int endX = (int) playerPos.x;
         int endY = (int) playerPos.y;
 
-        Node startNode = LevelManager.airGraph.getNodeByXY(startX, startY);
-        Node endNode = LevelManager.airGraph.getNodeByXY(endX, endY);
+        startNode = LevelManager.airGraph.getNodeByXY(startX, startY);
+        endNode = LevelManager.airGraph.getNodeByXY(endX, endY);
 
-        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
+//        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
+
+        threadTest.start(pathFinder, startNode, endNode);
 
         try {
             int waypointIndex = resultPath.get(0).getIndex();
@@ -67,6 +74,14 @@ public class FlyingTestEnemyComponent extends Component implements Telegraph, Up
 
     public void update(float delta) {
         stateMachine.update();
+
+//        resultPath = new GraphPathImp();
+//
+//        int x = 1000;
+//        while (--x > 0) {
+//            resultPath = new GraphPathImp();
+//            pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
+//        }
 
         // Change this to time based
         if (Gdx.input.isKeyJustPressed(Input.Keys.P) && steering.getLinearVelocity().x == 0 && steering.getLinearVelocity().y == 0) {

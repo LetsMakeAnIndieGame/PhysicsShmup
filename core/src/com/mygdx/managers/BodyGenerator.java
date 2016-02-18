@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
@@ -17,13 +18,15 @@ import com.badlogic.gdx.utils.JsonValue;
 public class BodyGenerator {
     private static World world;
 
+    private static GlyphLayout glyphLayout;
+
     public static void registerWorld(World world) {
         BodyGenerator.world = world;
     }
 
     public static Body generateBody(Entity owner, Vector2 position, BitmapFont image, CharSequence msg, FileHandle handle, short filterCategory) {
-        BitmapFont.TextBounds bounds = image.getBounds(msg);
-        return bodyHelper(owner, position, new Vector2(bounds.width, bounds.height), handle, filterCategory);
+        glyphLayout.setText(image, msg);
+        return bodyHelper(owner, position, new Vector2(glyphLayout.width, glyphLayout.height), handle, filterCategory);
     }
 
     public static Body generateBody(Entity owner, Sprite image, FileHandle handle, short filterCategory) {

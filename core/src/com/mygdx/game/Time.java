@@ -2,9 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 
-/**
- * Created by Phil on 12/31/2014.
- */
+
 public class Time {
     public static double time = 1.0d; // Ratio of "idealized" framerate and actual framerate
 

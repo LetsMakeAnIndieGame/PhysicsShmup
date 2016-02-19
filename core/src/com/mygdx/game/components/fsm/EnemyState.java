@@ -6,9 +6,7 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.mygdx.managers.Messages;
 
-/**
- * Created by Phil on 2/28/2015.
- */
+
 public enum EnemyState implements State<EnemyAgentComponent> {
 
     SEEKING() {

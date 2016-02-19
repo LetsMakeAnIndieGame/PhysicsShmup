@@ -12,9 +12,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 
-/**
- * Created by Phil on 2/8/2015.
- */
+
 public class BodyGenerator {
     private static World world;
 

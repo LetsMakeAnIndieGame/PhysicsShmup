@@ -3,10 +3,8 @@ package com.mygdx.game.components.physics;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
-/**
-* Created by Phil on 2/4/2015.
-*/
-public class VelocityComponent extends Component {
+
+public class VelocityComponent implements Component {
     public float x = 0;
     public float y = 0;
 

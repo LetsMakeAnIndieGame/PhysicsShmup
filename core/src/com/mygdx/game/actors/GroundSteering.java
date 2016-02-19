@@ -7,9 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 4/15/2015.
- */
 public class GroundSteering extends Steering implements Steerable<Vector2>, Updateable {
     public GroundSteering(Vector2 position) {
         super(position);

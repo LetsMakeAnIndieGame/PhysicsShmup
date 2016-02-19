@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-/**
- * Created by Phil on 12/29/2014.
- */
+
 public class GameInput implements InputProcessor {
     private static Vector2 oldMousePos = new Vector2(0,0);
 

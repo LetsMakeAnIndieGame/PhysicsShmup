@@ -8,9 +8,7 @@ import com.mygdx.game.components.physics.FauxGravityComponent;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.components.physics.VelocityComponent;
 
-/**
- * Created by Phil on 2/21/2015.
- */
+
 public class FauxGravitySystem extends IteratingSystem {
     private ComponentMapper<FauxGravityComponent>   fauxGravityMap = ComponentMapper.getFor(FauxGravityComponent.class);
     private ComponentMapper<PositionComponent>      positionMap = ComponentMapper.getFor(PositionComponent.class);

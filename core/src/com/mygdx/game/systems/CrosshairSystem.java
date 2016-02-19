@@ -16,9 +16,7 @@ import com.mygdx.managers.SoundManager;
 
 import javax.swing.text.Position;
 
-/**
- * Created by Phil on 2/9/2015.
- */
+
 public class CrosshairSystem extends IteratingSystem {
     private ComponentMapper<AttachedComponent>  attachedMap     = ComponentMapper.getFor(AttachedComponent.class);
     private ComponentMapper<SpriteComponent>    spriteMap       = ComponentMapper.getFor(SpriteComponent.class);

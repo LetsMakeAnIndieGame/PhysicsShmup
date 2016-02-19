@@ -6,9 +6,7 @@ import com.mygdx.game.components.physics.PositionComponent;
 
 import java.util.Comparator;
 
-/**
- * Created by Phil on 3/3/2015.
- */
+
 public class ZComparator implements Comparator<Entity> {
     private ComponentMapper<PositionComponent> posMap = ComponentMapper.getFor(PositionComponent.class);
 

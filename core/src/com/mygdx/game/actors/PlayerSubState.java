@@ -8,9 +8,6 @@ import com.mygdx.game.PhysicsShmup;
 import com.mygdx.game.components.fsm.PlayerAgent;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/25/2015.
- */
 public enum PlayerSubState implements State<PlayerAgent> {
 
     NONE() {

@@ -1,8 +1,6 @@
 package com.mygdx.managers;
 
-/**
- * Created by Phil on 1/10/2015.
- */
+
 import java.util.Iterator;
 
 import com.badlogic.ashley.core.Entity;

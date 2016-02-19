@@ -9,9 +9,6 @@ import com.mygdx.game.components.physics.BodyComponent;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/9/2015.
- */
 public class PositionSystem extends IteratingSystem {
     private ComponentMapper<PositionComponent>  positionMap   = ComponentMapper.getFor(PositionComponent.class);
     private ComponentMapper<SpriteComponent>    spriteMap     = ComponentMapper.getFor(SpriteComponent.class);

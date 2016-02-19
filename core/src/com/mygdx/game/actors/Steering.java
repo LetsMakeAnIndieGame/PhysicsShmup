@@ -17,9 +17,6 @@ import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.components.physics.VelocityComponent;
 import com.mygdx.game.pathfinding.GraphPathImp;
 
-/**
- * Created by Phil on 4/13/2015.
- */
 public abstract class Steering implements Steerable<Vector2>, Updateable {
     protected ComponentMapper<PositionComponent> positionMap  = ComponentMapper.getFor(PositionComponent.class);
     protected ComponentMapper<BodyComponent>     bodyMap      = ComponentMapper.getFor(BodyComponent.class);

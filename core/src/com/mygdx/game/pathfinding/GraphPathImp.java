@@ -6,9 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.Iterator;
 
-/**
- * Created by Phil on 3/8/2015.
- */
+
 public class GraphPathImp implements GraphPath<Node> {
     private Array<Node> nodes = new Array<Node>();
 

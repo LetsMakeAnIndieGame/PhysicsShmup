@@ -8,9 +8,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.managers.LevelManager;
 
-/**
- * Created by Phil on 3/9/2015.
- */
+
 public class GraphGenerator {
     public static GraphImp generateGroundGraph(TiledMap map) {
         Array<Node> nodes = new Array<Node>();

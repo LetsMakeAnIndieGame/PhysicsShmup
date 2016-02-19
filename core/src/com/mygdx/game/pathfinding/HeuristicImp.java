@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.pfa.Heuristic;
 import com.mygdx.managers.LevelManager;
 
-/**
- * Created by Phil on 3/8/2015.
- */
+
 public class HeuristicImp implements Heuristic<Node> {
     @Override
     public float estimate(Node startNode, Node endNode) {

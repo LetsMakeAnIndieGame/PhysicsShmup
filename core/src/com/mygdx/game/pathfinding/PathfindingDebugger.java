@@ -8,9 +8,7 @@ import com.mygdx.managers.LevelManager;
 
 import java.util.Iterator;
 
-/**
- * Created by Phil on 4/3/2015.
- */
+
 public class PathfindingDebugger {
     private static OrthographicCamera camera;
     private static ShapeRenderer shapeRenderer;

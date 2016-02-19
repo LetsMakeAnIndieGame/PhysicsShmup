@@ -21,9 +21,6 @@ import com.mygdx.managers.GameInput;
 import com.mygdx.managers.PhysicsManager;
 import com.mygdx.managers.RenderPriority;
 
-/**
- * Created by Phil on 2/10/2015.
- */
 public class CollisionManager implements ContactListener {
     private Engine engine;
 

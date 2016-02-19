@@ -21,7 +21,7 @@ import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
 import com.mygdx.managers.RenderPriority;
 
-public class EnemyCollisionComponent extends Component implements Collidable {
+public class EnemyCollisionComponent implements Component, Collidable {
     private ComponentMapper<TypeComponent> cm = ComponentMapper.getFor(TypeComponent.class);
     private ComponentMapper<BulletDamageComponent> bm = ComponentMapper.getFor(BulletDamageComponent.class);
     private ComponentMapper<EnemyDataComponent> em = ComponentMapper.getFor(EnemyDataComponent.class);

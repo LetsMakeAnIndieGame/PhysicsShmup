@@ -12,9 +12,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 //import com.badlogic.gdx.math.Vector3;
 //import com.mygdx.game.actors.GameObject;
 //
-///**
-// * Created by Phil on 12/29/2014.
-// */
 //
 //public class TextManager {
 //    private static BitmapFont bfont = new BitmapFont();

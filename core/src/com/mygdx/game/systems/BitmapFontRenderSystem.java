@@ -10,9 +10,7 @@ import com.mygdx.game.components.graphics.BitmapFontComponent;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.components.graphics.RenderableComponent;
 
-/**
- * Created by Phil on 2/21/2015.
- */
+
 public class BitmapFontRenderSystem extends IteratingSystem {
     private SpriteBatch batch;
 

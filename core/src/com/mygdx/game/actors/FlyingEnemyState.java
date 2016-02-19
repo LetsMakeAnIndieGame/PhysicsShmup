@@ -5,9 +5,6 @@ import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.mygdx.managers.Messages;
 
-/**
- * Created by Phil on 4/11/2015.
- */
 public enum FlyingEnemyState implements State<FlyingTestEnemyComponent> {
 
     SEEKING() {

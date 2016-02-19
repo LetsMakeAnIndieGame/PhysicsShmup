@@ -5,10 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * Created by Phil on 2/7/2015.
- */
-public class SpriteComponent extends Component {
+
+public class SpriteComponent implements Component {
     public Array<Sprite> sprites = new Array<Sprite>();
 
     public SpriteComponent(Texture...textures) {

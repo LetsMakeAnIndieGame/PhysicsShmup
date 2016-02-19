@@ -10,9 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.components.PlayerDataComponent;
 import com.mygdx.game.components.graphics.SpriteComponent;
 
-/**
- * Created by Phil on 2/15/2015.
- */
+
 public class TurnaroundSystem extends IteratingSystem {
     private ComponentMapper<SpriteComponent> spriteMap = ComponentMapper.getFor(SpriteComponent.class);
 

@@ -8,10 +8,7 @@ import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/16/2015.
- */
-public class MoneyCollisionComponent extends Component implements Collidable {
+public class MoneyCollisionComponent implements Component, Collidable {
     @Override
     public void handleCollision(Engine engine, Entity collider, Entity collidee) {
         short type = collidee.getComponent(TypeComponent.class).type;

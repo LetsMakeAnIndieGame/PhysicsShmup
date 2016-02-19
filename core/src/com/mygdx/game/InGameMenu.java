@@ -2,9 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Screen;
 
-/**
- * Created by Phil on 1/5/2015.
- */
+
 public class InGameMenu implements Screen {
 
     @Override

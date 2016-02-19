@@ -6,9 +6,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.pathfinding.GraphGenerator;
 import com.mygdx.game.pathfinding.GraphImp;
 
-/**
- * Created by Phil on 3/10/2015.
- */
+
 public class LevelManager {
     public static int lvlTileWidth;
     public static int lvlTileHeight;

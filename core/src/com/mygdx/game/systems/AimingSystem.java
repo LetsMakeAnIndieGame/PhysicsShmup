@@ -6,9 +6,7 @@ import com.mygdx.game.components.*;
 import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.managers.GameInput;
 
-/**
- * Created by Phil on 2/9/2015.
- */
+
 public class AimingSystem extends IteratingSystem {
     private ComponentMapper<LookAngleComponent> lookAngleMap = ComponentMapper.getFor(LookAngleComponent.class);
     private ComponentMapper<SpriteComponent>    spriteMap    = ComponentMapper.getFor(SpriteComponent.class);

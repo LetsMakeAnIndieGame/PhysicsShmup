@@ -10,9 +10,7 @@ import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.managers.EntityManager;
 
-/**
-* Created by Phil on 2/22/2015.
-*/
+
 public class HealthBarSystem extends IteratingSystem {
     ComponentMapper<AttachedComponent>  attachedMap = ComponentMapper.getFor(AttachedComponent.class);
     ComponentMapper<PositionComponent>  positionMap = ComponentMapper.getFor(PositionComponent.class);

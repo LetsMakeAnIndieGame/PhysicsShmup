@@ -7,9 +7,7 @@ import com.badlogic.gdx.ai.pfa.indexed.DefaultIndexedGraph;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.managers.LevelManager;
 
-/**
-* Created by Phil on 3/8/2015.
-*/
+
 public class GraphImp extends DefaultIndexedGraph<Node> {
     public GraphImp() {
         super();

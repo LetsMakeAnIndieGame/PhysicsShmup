@@ -12,9 +12,7 @@ import com.mygdx.game.components.physics.PositionComponent;
 import javax.swing.text.Position;
 import java.util.Comparator;
 
-/**
- * Created by Phil on 2/7/2015.
- */
+
 public class SpriteRenderSystem extends SortedIteratingSystem {
     private SpriteBatch batch;
 

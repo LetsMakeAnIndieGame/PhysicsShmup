@@ -11,9 +11,6 @@ import com.mygdx.managers.PhysicsManager;
 
 import java.math.BigDecimal;
 
-/**
- * Created by Phil on 4/13/2015.
- */
 public class AirbornSteering extends Steering implements Steerable<Vector2>, Updateable {
     public AirbornSteering(Vector2 position) {
         super(position);

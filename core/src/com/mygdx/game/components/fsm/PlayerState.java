@@ -6,9 +6,6 @@ import com.mygdx.game.actors.PlayerSubState;
 import com.mygdx.managers.GameInput;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/24/2015.
- */
 public enum PlayerState implements State<PlayerAgent>  {
 
     GROUNDED() {

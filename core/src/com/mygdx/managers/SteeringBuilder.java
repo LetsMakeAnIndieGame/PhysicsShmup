@@ -11,9 +11,7 @@ import com.mygdx.game.actors.AirbornSteering;
 import com.mygdx.game.actors.GroundSteering;
 import com.mygdx.game.actors.Steering;
 
-/**
- * Created by Phil on 4/13/2015.
- */
+
 public class SteeringBuilder {
     private static final String path = "Entities/Steerings/";
 

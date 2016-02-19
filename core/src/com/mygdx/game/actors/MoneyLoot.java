@@ -9,9 +9,6 @@
 //import com.mygdx.managers.EntityManager;
 //import com.mygdx.managers.PhysicsManager;
 //
-///**
-// * Created by Phil on 1/22/2015.
-// */
 //public class MoneyLoot extends PhysicsActor {
 //    private Texture texture;
 //    private Body body;

@@ -14,9 +14,7 @@ import com.mygdx.game.components.physics.VelocityComponent;
 import com.mygdx.game.components.states.SensorCollisionComponent;
 import com.mygdx.managers.GameInput;
 
-/**
- * Created by Phil on 2/24/2015.
- */
+
 public class PlayerAgent implements Updateable {
     public StateMachine<PlayerAgent> stateMachine;
     public StateMachine<PlayerAgent> subStateMachine;

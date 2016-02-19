@@ -18,9 +18,7 @@ import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.Time;
 import com.mygdx.game.systems.*;
 
-/**
- * Created by Phil on 1/13/2015.
- */
+
 public class EntityManager {
     private static Engine engine;
     private static Entity player;

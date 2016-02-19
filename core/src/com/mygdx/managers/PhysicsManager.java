@@ -1,8 +1,6 @@
 package com.mygdx.managers;
 
-/**
- * Created by Phil on 1/6/2015.
- */
+
 public class PhysicsManager {
     public final static float   PIXELS_TO_METERS              = 0.01f;
     public final static int     METERS_TO_PIXELS              = 100;

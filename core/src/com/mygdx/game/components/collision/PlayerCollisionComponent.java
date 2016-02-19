@@ -9,10 +9,7 @@ import com.mygdx.game.components.PlayerDataComponent;
 import com.mygdx.managers.PhysicsManager;
 import com.mygdx.managers.UIManager;
 
-/**
- * Created by Phil on 2/16/2015.
- */
-public class PlayerCollisionComponent extends Component implements Collidable {
+public class PlayerCollisionComponent implements Component, Collidable {
     // This is what happens when you're a bad programmer and/or lazy
 
     @Override

@@ -7,9 +7,6 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.components.physics.PositionComponent;
 
-/**
- * Created by Phil on 3/2/2015.
- */
 public class TestPlayerSteering extends Steering implements Steerable<Vector2>, Updateable {
     protected ComponentMapper<PositionComponent> positionMap  = ComponentMapper.getFor(PositionComponent.class);
 

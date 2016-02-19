@@ -24,9 +24,7 @@ import com.mygdx.game.components.states.SensorCollisionComponent;
 
 import java.util.Iterator;
 
-/**
- * Created by Phil on 3/2/2015.
- */
+
 public class SpawnGenerator {
     private static World world;
     private static TiledMap tiledMap;

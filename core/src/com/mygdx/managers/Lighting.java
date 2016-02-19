@@ -18,9 +18,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 import java.util.Iterator;
 
-/**
- * Created by Phil on 1/11/2015.
- */
+
 public class Lighting {
     private static World world;
     private static TiledMap tiledMap;

@@ -8,9 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.mygdx.game.PhysicsShmup;
 
-/**
- * Created by Phil on 1/18/2015.
- */
+
 public class UIManager {
     private static Stage stage;
     private static Table table;

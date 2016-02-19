@@ -11,9 +11,7 @@ import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.graphics.TransparentComponent;
 import com.mygdx.managers.EntityManager;
 
-/**
- * Created by Phil on 2/21/2015.
- */
+
 public class DeathTimerSystem extends IteratingSystem {
     ComponentMapper<DeathTimerComponent>    deathTimerMap   = ComponentMapper.getFor(DeathTimerComponent.class);
     ComponentMapper<TransparentComponent>   transparencyMap = ComponentMapper.getFor(TransparentComponent.class);

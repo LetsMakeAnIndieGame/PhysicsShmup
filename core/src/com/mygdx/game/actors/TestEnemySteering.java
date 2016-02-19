@@ -20,9 +20,6 @@ import com.mygdx.game.components.physics.VelocityComponent;
 import com.mygdx.managers.GameInput;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/26/2015.
- */
 public class TestEnemySteering implements Steerable<Vector2>, Updateable {
     private ComponentMapper<PositionComponent> positionMap  = ComponentMapper.getFor(PositionComponent.class);
     private ComponentMapper<BodyComponent>     bodyMap      = ComponentMapper.getFor(BodyComponent.class);

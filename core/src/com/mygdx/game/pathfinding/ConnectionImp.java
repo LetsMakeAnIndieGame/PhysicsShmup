@@ -3,9 +3,7 @@ package com.mygdx.game.pathfinding;
 import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 
-/**
- * Created by Phil on 3/7/2015.
- */
+
 public class ConnectionImp implements Connection<Node> {
     private Node toNode;
     private Node fromNode;

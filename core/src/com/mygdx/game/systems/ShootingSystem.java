@@ -24,9 +24,7 @@ import com.mygdx.managers.BodyGenerator;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
 
-/**
- * Created by Phil on 2/14/2015.
- */
+
 public class ShootingSystem extends IteratingSystem {
     private Engine engine;
     private World world;

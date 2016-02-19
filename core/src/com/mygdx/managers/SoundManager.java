@@ -6,9 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
-/**
-* Created by Phil on 1/5/2015.
-*/
+
 public class SoundManager {
     private static Sound music;
     private static Sound sfx;

@@ -4,9 +4,7 @@ import com.badlogic.gdx.ai.pfa.Connection;
 import com.badlogic.gdx.ai.pfa.indexed.IndexedNode;
 import com.badlogic.gdx.utils.Array;
 
-/**
- * Created by Phil on 3/7/2015.
- */
+
 public class Node implements IndexedNode<Node> {
     private Array<Connection<Node>> connections = new Array<Connection<Node>>();
     public int type;

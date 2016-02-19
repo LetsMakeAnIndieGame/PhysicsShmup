@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Component;
 /**
  * Created by Phil on 2/17/2015.
  */
-public class PlayerDataComponent extends Component {
+public class PlayerDataComponent implements Component {
     public long level = 1;
     public long money = 0;
     public long health = 100;

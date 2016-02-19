@@ -11,7 +11,7 @@ import com.mygdx.managers.EntityManager;
 /**
  * Created by Phil on 2/19/2015.
  */
-public class BulletCollisionComponent extends Component implements Collidable {
+public class BulletCollisionComponent implements Component, Collidable {
     @Override
     public void handleCollision(Engine engine, Entity collider, Entity collidee) {
         // Bullets will always be destroyed when handling a collision?

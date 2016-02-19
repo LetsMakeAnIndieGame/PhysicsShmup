@@ -11,6 +11,7 @@ import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.Flee;
 import com.badlogic.gdx.ai.steer.behaviors.Seek;
+import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -90,6 +91,11 @@ public class TestEnemySteering implements Steerable<Vector2>, Updateable {
         return outVector;
     }
 
+    @Override
+    public Location<Vector2> newLocation() {
+        return null;
+    }
+
     public static float calculateOrientationFromLinearVelocity (Steerable<Vector2> character) {
         // If we haven't got any velocity, then we can do nothing.
         if (character.getLinearVelocity().isZero(MathUtils.FLOAT_ROUNDING_ERROR))
@@ -152,6 +158,11 @@ public class TestEnemySteering implements Steerable<Vector2>, Updateable {
     }
 
     @Override
+    public void setOrientation(float orientation) {
+
+    }
+
+    @Override
     public Vector2 getLinearVelocity() {
         return linearVelocity;
     }
@@ -177,8 +188,13 @@ public class TestEnemySteering implements Steerable<Vector2>, Updateable {
     }
 
     @Override
-    public Vector2 newVector() {
-        return null;
+    public float getZeroLinearSpeedThreshold() {
+        return 0;
+    }
+
+    @Override
+    public void setZeroLinearSpeedThreshold(float value) {
+
     }
 
     @Override

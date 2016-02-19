@@ -24,7 +24,7 @@ import com.mygdx.managers.Messages;
 /**
  * Created by Phil on 2/28/2015.
  */
-public class EnemyAgentComponent extends Component implements Telegraph, Updateable {
+public class EnemyAgentComponent implements Component, Telegraph, Updateable {
     public StateMachine<EnemyAgentComponent> stateMachine;
 
     public boolean isShot = false;

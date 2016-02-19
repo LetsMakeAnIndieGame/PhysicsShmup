@@ -21,7 +21,13 @@ import com.mygdx.game.pathfinding.PathfindingDebugger;
 import com.mygdx.managers.LevelManager;
 import com.mygdx.managers.Messages;
 
+<<<<<<< HEAD
 
+=======
+/**
+ * Created by Phil on 2/28/2015.
+ */
+>>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
 public class EnemyAgentComponent implements Component, Telegraph, Updateable {
     public StateMachine<EnemyAgentComponent> stateMachine;
 

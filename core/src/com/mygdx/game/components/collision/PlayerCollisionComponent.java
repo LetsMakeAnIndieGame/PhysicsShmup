@@ -9,6 +9,12 @@ import com.mygdx.game.components.PlayerDataComponent;
 import com.mygdx.managers.PhysicsManager;
 import com.mygdx.managers.UIManager;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by Phil on 2/16/2015.
+ */
+>>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
 public class PlayerCollisionComponent implements Component, Collidable {
     // This is what happens when you're a bad programmer and/or lazy
 

@@ -8,6 +8,12 @@ import com.mygdx.game.components.physics.BodyComponent;
 import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.managers.EntityManager;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by Phil on 2/19/2015.
+ */
+>>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
 public class BulletCollisionComponent implements Component, Collidable {
     @Override
     public void handleCollision(Engine engine, Entity collider, Entity collidee) {

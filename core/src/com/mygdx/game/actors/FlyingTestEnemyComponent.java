@@ -20,6 +20,12 @@ import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.LevelManager;
 import com.mygdx.managers.Messages;
 
+<<<<<<< HEAD
+=======
+/**
+ * Created by Phil on 4/11/2015.
+ */
+>>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
 public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable {
     public StateMachine<FlyingTestEnemyComponent> stateMachine;
 

@@ -19,18 +19,13 @@ import com.mygdx.game.pathfinding.*;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.LevelManager;
 import com.mygdx.managers.Messages;
+import com.mygdx.managers.ThreadManager;
 
-<<<<<<< HEAD
-=======
-/**
- * Created by Phil on 4/11/2015.
- */
->>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
+
 public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable {
     public StateMachine<FlyingTestEnemyComponent> stateMachine;
 
     public boolean isShot = false;
-    public ThreadTest threadTest = new ThreadTest();
 
     private Entity entity;
     private Steering steering;
@@ -64,7 +59,9 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
 
 //        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
 
-        threadTest.start(pathFinder, startNode, endNode);
+        ThreadManager threadManager = ThreadManager.getInstance();
+        ThreadManager.PathfindingThread pathfindingThread = threadManager.requestPathfindingThread();
+        pathfindingThread.start(pathFinder, startNode, endNode);
 
         try {
             int waypointIndex = resultPath.get(0).getIndex();

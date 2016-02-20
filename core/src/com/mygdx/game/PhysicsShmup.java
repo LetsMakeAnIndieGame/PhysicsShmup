@@ -20,6 +20,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.actors.ThreadTest;
 import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.pathfinding.GraphGenerator;
@@ -54,7 +55,6 @@ public class PhysicsShmup extends ApplicationAdapter {
 	@Override
 	public void create () {
         ThreadPoolExecutor execServ = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-
 //        execServ.`
         LevelManager.loadLevel("Levels/testlvl.tmx");
 		Gdx.input.setCursorCatched(true); // remove mouse cursor

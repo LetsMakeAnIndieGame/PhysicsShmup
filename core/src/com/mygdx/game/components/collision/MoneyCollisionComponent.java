@@ -8,12 +8,7 @@ import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
 
-<<<<<<< HEAD
-=======
-/**
- * Created by Phil on 2/16/2015.
- */
->>>>>>> 437872d6f8d44f9dc3ffe938a1dca805f6282a1d
+
 public class MoneyCollisionComponent implements Component, Collidable {
     @Override
     public void handleCollision(Engine engine, Entity collider, Entity collidee) {

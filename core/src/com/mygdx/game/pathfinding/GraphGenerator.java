@@ -1,9 +1,7 @@
 package com.mygdx.game.pathfinding;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ai.pfa.indexed.DefaultIndexedGraph;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.managers.LevelManager;

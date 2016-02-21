@@ -23,7 +23,7 @@ import com.mygdx.managers.Messages;
 
 
 public class EnemyAgentComponent implements Component, Telegraph, Updateable {
-    public StateMachine<EnemyAgentComponent> stateMachine;
+    public StateMachine<EnemyAgentComponent, EnemyState> stateMachine;
 
     public boolean isShot = false;
 
@@ -36,7 +36,7 @@ public class EnemyAgentComponent implements Component, Telegraph, Updateable {
     public EnemyAgentComponent(Entity entity, Steering steering) {
         this.entity = entity;
         this.steering = steering;
-        stateMachine = new DefaultStateMachine<EnemyAgentComponent>(this, EnemyState.SEEKING);
+        stateMachine = new DefaultStateMachine<>(this, EnemyState.SEEKING);
         MessageManager.getInstance().addListener(this, Messages.PLAYER_ATTACKED_ENEMY);
 
         pathFinder = new IndexedAStarPathFinder<Node>(LevelManager.groundGraph, false);

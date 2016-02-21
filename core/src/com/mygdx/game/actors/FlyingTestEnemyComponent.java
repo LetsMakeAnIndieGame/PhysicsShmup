@@ -23,7 +23,7 @@ import com.mygdx.managers.ThreadManager;
 
 
 public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable {
-    public StateMachine<FlyingTestEnemyComponent> stateMachine;
+    public StateMachine<FlyingTestEnemyComponent, FlyingEnemyState> stateMachine;
 
     public boolean isShot = false;
 
@@ -41,7 +41,7 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
     public FlyingTestEnemyComponent(Entity entity, Steering steering) {
         this.entity = entity;
         this.steering = steering;
-        stateMachine = new DefaultStateMachine<FlyingTestEnemyComponent>(this, FlyingEnemyState.SEEKING);
+        stateMachine = new DefaultStateMachine<FlyingTestEnemyComponent, FlyingEnemyState>(this, FlyingEnemyState.SEEKING);
         MessageManager.getInstance().addListener(this, Messages.PLAYER_ATTACKED_ENEMY);
 
         pathFinder = new IndexedAStarPathFinder<Node>(LevelManager.airGraph, false);

@@ -2,37 +2,20 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.*;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.ai.pfa.indexed.DefaultIndexedGraph;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.MapProperties;
-import com.badlogic.gdx.maps.tiled.TideMapLoader;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.actors.ThreadTest;
-import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.physics.PositionComponent;
-import com.mygdx.game.pathfinding.GraphGenerator;
-import com.mygdx.game.pathfinding.HeuristicImp;
-import com.mygdx.game.pathfinding.Node;
 import com.mygdx.game.pathfinding.PathfindingDebugger;
 import com.mygdx.game.systems.CollisionManager;
 import com.mygdx.managers.*;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class PhysicsShmup extends ApplicationAdapter {
 	public static long currentTimeMillis;
@@ -54,8 +37,6 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	@Override
 	public void create () {
-        ThreadPoolExecutor execServ = (ThreadPoolExecutor) Executors.newCachedThreadPool();
-//        execServ.`
         LevelManager.loadLevel("Levels/testlvl.tmx");
 		Gdx.input.setCursorCatched(true); // remove mouse cursor
 		Engine engine = new Engine();
@@ -103,7 +84,7 @@ public class PhysicsShmup extends ApplicationAdapter {
         Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond());
 		currentTimeMillis = System.currentTimeMillis();
 
-        MessageManager.getInstance().update(Gdx.graphics.getRawDeltaTime());
+        MessageManager.getInstance().update();
 		world.step(1f / 60f, 6, 2);
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PhysicsManager.METERS_TO_PIXELS, PhysicsManager.METERS_TO_PIXELS, 0);

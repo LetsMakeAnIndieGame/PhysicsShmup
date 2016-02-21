@@ -16,8 +16,8 @@ import com.mygdx.managers.GameInput;
 
 
 public class PlayerAgent implements Updateable {
-    public StateMachine<PlayerAgent> stateMachine;
-    public StateMachine<PlayerAgent> subStateMachine;
+    public StateMachine<PlayerAgent, PlayerState> stateMachine;
+    public StateMachine<PlayerAgent, PlayerSubState> subStateMachine;
     public boolean isTouchingGround = true;
     public boolean isTouchingWallLeft = false;
     public boolean isTouchingWallRight = false;
@@ -31,8 +31,8 @@ public class PlayerAgent implements Updateable {
 
     public PlayerAgent(Entity entity) {
         this.entity = entity;
-        stateMachine = new DefaultStateMachine<PlayerAgent>(this, PlayerState.GROUNDED);
-        subStateMachine = new DefaultStateMachine<PlayerAgent>(this, PlayerSubState.NONE);
+        stateMachine = new DefaultStateMachine<>(this, PlayerState.GROUNDED);
+        subStateMachine = new DefaultStateMachine<>(this, PlayerSubState.NONE);
     }
 
     public float getBodyVelocityY() {

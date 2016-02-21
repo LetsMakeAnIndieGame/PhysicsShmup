@@ -5,6 +5,7 @@ import box2dLight.PointLight;
 import box2dLight.RayHandler;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.CircleMapObject;
@@ -82,10 +83,9 @@ public class Lighting {
         }
     }
 
-    public static void updateAndShowLights(Camera camera) {
+    public static void updateAndShowLights(OrthographicCamera camera) {
         if (lights.size > 0) {
-            rayHandler.setCombinedMatrix(camera.combined.cpy().scale(PhysicsManager.METERS_TO_PIXELS,
-                    PhysicsManager.METERS_TO_PIXELS, 1f));
+            rayHandler.setCombinedMatrix(camera);
             rayHandler.updateAndRender();
         }
     }

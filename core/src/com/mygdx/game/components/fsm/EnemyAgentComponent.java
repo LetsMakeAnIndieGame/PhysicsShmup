@@ -50,9 +50,9 @@ public class EnemyAgentComponent implements Component, Telegraph, Updateable {
         Node startNode = LevelManager.groundGraph.getNodeByXY(startX, startY);
         Node endNode = LevelManager.groundGraph.getNodeByXY(endX, endY);
 
-        pathFinder.searchNodePath(startNode, endNode, new HeuristicImp(), resultPath);
-
-        Gdx.app.log("Path length", "" + resultPath.getCount());
+//        pathFinder.searchNodePath(startNode, endNode, new HeuristicImp(), resultPath);
+//
+//        Gdx.app.log("Path length", "" + resultPath.getCount());
     }
 
     public void update(float delta) {

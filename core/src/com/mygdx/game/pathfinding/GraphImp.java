@@ -37,16 +37,16 @@ public class GraphImp implements IndexedGraph<Node> {
 
     @Override
     public int getIndex(Node node) {
-        return 0;
+        return nodes.indexOf(node, true);
     }
 
     @Override
     public int getNodeCount() {
-        return 0;
+        return nodes.size;
     }
 
     @Override
     public Array<Connection<Node>> getConnections(Node fromNode) {
-        return null;
+        return fromNode.getConnections();
     }
 }

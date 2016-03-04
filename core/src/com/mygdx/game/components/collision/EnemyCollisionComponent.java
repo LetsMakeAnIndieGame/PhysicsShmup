@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.actors.Collidable;
+import com.mygdx.game.actors.FlyingTestEnemyComponent;
 import com.mygdx.game.components.fsm.EnemyAgentComponent;
 import com.mygdx.game.components.*;
 import com.mygdx.game.components.graphics.BitmapFontComponent;
@@ -26,7 +27,7 @@ public class EnemyCollisionComponent implements Component, Collidable {
     private ComponentMapper<BulletDamageComponent> bm = ComponentMapper.getFor(BulletDamageComponent.class);
     private ComponentMapper<EnemyDataComponent> em = ComponentMapper.getFor(EnemyDataComponent.class);
     private ComponentMapper<SpriteComponent> sm = ComponentMapper.getFor(SpriteComponent.class);
-    private ComponentMapper<EnemyAgentComponent> am = ComponentMapper.getFor(EnemyAgentComponent.class);
+    private ComponentMapper<FlyingTestEnemyComponent> am = ComponentMapper.getFor(FlyingTestEnemyComponent.class);
 
     private GlyphLayout glyphLayout;
 
@@ -44,7 +45,8 @@ public class EnemyCollisionComponent implements Component, Collidable {
             Entity indicator = new Entity();
             BitmapFontComponent bFontCom = new BitmapFontComponent(Gdx.files.internal("Entities/Scene2D/damage.fnt"), "" + damage);
             // Because bitmap font getBounds is deprecated, need to use glyphLayout :(
-            glyphLayout.setText(bFontCom.bFont, bFontCom.msg);
+            glyphLayout = new GlyphLayout(bFontCom.bFont, bFontCom.msg);
+//            glyphLayout.setText(bFontCom.bFont, bFontCom.msg);
             float textWidth = glyphLayout.width;
             float textHeight = glyphLayout.height;
             PositionComponent posCom = new PositionComponent(sprite.getX() + sprite.getWidth() / 2 - textWidth / 2, sprite.getY() + sprite.getHeight() / 2 + textHeight / 2, RenderPriority.HIGH);

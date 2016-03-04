@@ -57,11 +57,11 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
         startNode = LevelManager.airGraph.getNodeByXY(startX, startY);
         endNode = LevelManager.airGraph.getNodeByXY(endX, endY);
 
-//        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
+        pathFinder.searchNodePath(startNode, endNode, new FlyingHeuristic(), resultPath);
 
-        ThreadManager threadManager = ThreadManager.getInstance();
-        ThreadManager.PathfindingThread pathfindingThread = threadManager.requestPathfindingThread();
-        pathfindingThread.start(pathFinder, startNode, endNode);
+//        ThreadManager threadManager = ThreadManager.getInstance();
+//        ThreadManager.PathfindingThread pathfindingThread = threadManager.requestPathfindingThread();
+//        pathfindingThread.start(pathFinder, startNode, endNode);
 
         try {
             int waypointIndex = resultPath.get(0).getIndex();
@@ -100,7 +100,6 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
     }
 
     public void startSeeking() {
-
         steering.setSteeringBehavior(Arrive.class);
     }
 

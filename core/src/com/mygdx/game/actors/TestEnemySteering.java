@@ -61,14 +61,14 @@ public class TestEnemySteering implements Steerable<Vector2>, Updateable {
         position        = new Vector2(positionMap.get(entity).x, positionMap.get(entity).y);
         linearVelocity  = new Vector2(velocityMap.get(entity).x, velocityMap.get(entity).y);
         bodyCom         = bodyMap.get(entity);
-        steeringBehavior = new Arrive<Vector2>(this, target).setDecelerationRadius(100).setArrivalTolerance(30);
+        steeringBehavior = new Arrive<>(this, target).setDecelerationRadius(100).setArrivalTolerance(30);
     }
 
     public void setSteeringBehavior(Class<?> behaviorType) {
         if (behaviorType == Arrive.class) {
-            steeringBehavior = new Arrive<Vector2>(this, target).setDecelerationRadius(100).setArrivalTolerance(30);
+            steeringBehavior = new Arrive<>(this, target).setDecelerationRadius(100).setArrivalTolerance(30);
         } else if (behaviorType == Flee.class) {
-            steeringBehavior = new Flee<Vector2>(this, target);
+            steeringBehavior = new Flee<>(this, target);
         }
     }
 

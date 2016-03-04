@@ -137,6 +137,7 @@ public class SpawnGenerator {
                 enemySteering.setMaxLinearAcceleration(0.25f);
                 enemySteering.setMaxLinearSpeed(2f);
                 enemySteering.setMinLinearSpeed(0.0001f);
+//                enemySteering.setTarget(EntityManager.getPlayerSteering());
                 FlyingTestEnemyComponent enemyAgentComponent = new FlyingTestEnemyComponent(enemy, enemySteering);
                 enemy.add(enemyAgentComponent);
 

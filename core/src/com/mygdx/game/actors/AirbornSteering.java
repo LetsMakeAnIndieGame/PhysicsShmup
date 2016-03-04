@@ -4,6 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
+import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -14,11 +15,22 @@ import java.math.BigDecimal;
 
 public class AirbornSteering extends Steering implements Steerable<Vector2>, Updateable {
     public AirbornSteering(Vector2 position) {
-        super(position);
+        this.position = position;
     }
 
-    public AirbornSteering(Entity entity) {
-        super(entity);
+    public AirbornSteering(Entity entity, Steerable<Vector2> target) {
+        independentFacing = true;
+        maxLinearSpeed = 10f;
+        maxLinearAcceleration = 1f;
+        maxAngularSpeed = 3;
+        maxAngularAcceleration = 3;
+        this.target = target;
+
+        position        = new Vector2(positionMap.get(entity).x, positionMap.get(entity).y);
+        linearVelocity  = new Vector2(velocityMap.get(entity).x, velocityMap.get(entity).y);
+        bodyCom         = bodyMap.get(entity);
+        steeringBehavior = new Arrive<>(this, target).setDecelerationRadius(100).setArrivalTolerance(30);
+        steeringBehavior = null; // just for debug, otherwise the flying enemy starts off chasing the player
     }
 
     @Override

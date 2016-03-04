@@ -21,7 +21,7 @@ public class SteeringBuilder {
         JsonValue root = getRoot(filename);
 
         if (root.get("type").asString().equalsIgnoreCase("airborn")) {
-            steering = new AirbornSteering(entity);
+            steering = new AirbornSteering(entity, EntityManager.getPlayerSteering());
         } else if (root.get("type").asString().equalsIgnoreCase("ground")) {
             steering = new GroundSteering(entity);
         }

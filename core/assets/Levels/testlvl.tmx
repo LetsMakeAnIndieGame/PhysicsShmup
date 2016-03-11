@@ -135,5 +135,89 @@
     <property name="toSpawn" value="Basic"/>
    </properties>
   </object>
+  <object gid="30" x="1145" y="903">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1268" y="899">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1357" y="899">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="999" y="909">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="810" y="895">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="675" y="900">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="671" y="1010">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="825" y="1010">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1013" y="1013">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1151" y="1014">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1268" y="1012">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1367" y="1017">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="914" y="911">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
+  <object gid="30" x="1080" y="953">
+   <properties>
+    <property name="steering" value="FlyingSteering"/>
+    <property name="toSpawn" value="Basic"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

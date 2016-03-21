@@ -2,7 +2,6 @@ package com.mygdx.managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.msg.MessageDispatcher;
-import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
 import com.badlogic.gdx.ai.pfa.PathFinderQueue;
@@ -14,10 +13,9 @@ import com.mygdx.game.pathfinding.GraphPathImp;
 import com.mygdx.game.pathfinding.Node;
 import com.mygdx.game.pathfinding.Pather;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.*;
 
 public class PathfindingManager {
 
@@ -26,22 +24,26 @@ public class PathfindingManager {
     private static int threadCount = 0;
     private static CopyOnWriteArrayList<PathfindingThread> activeThreads;
 
+    private ExecutorService executor;
+
     private PathfindingManager() {
         activeThreads = new CopyOnWriteArrayList<>();
         threadCount = Runtime.getRuntime().availableProcessors();
 
         threadCount--;
+
+        executor = Executors.newFixedThreadPool(threadCount);
     }
 
     public void requestPathfinding(Pather requester, IndexedAStarPathFinder<Node> pathFinder,
                                    Node startNode, Node endNode) {
         if (activeThreads.size() < threadCount) {
-            PathfindingThread thread = new PathfindingThread(pathFinder);
-            activeThreads.add(thread);
+            PathfindingThread pathfindingThread = new PathfindingThread(pathFinder);
+            activeThreads.add(pathfindingThread);
 
-            thread.addPathfindingRequest(requester, startNode, endNode);
+            pathfindingThread.addPathfindingRequest(requester, startNode, endNode);
 
-            thread.start();
+            executor.execute(pathfindingThread);
         } else {
             Iterator<PathfindingThread> threads = activeThreads.iterator();
             int requestCount = 2;
@@ -55,6 +57,10 @@ public class PathfindingManager {
                     break;
                 } else {
                     requestCount = thread.queue.size();
+                }
+
+                if (!threads.hasNext()) {
+                    activeThreads.get(0).addPathfindingRequest(requester, startNode, endNode);
                 }
             }
         }
@@ -72,8 +78,7 @@ public class PathfindingManager {
         return instance;
     }
 
-    public class PathfindingThread implements Runnable, Telegraph {
-        Thread thread = null;
+    public class PathfindingThread implements Runnable, Telegraph, Serializable {
         IndexedAStarPathFinder<Node> pathFinder;
 
         PathFinderQueue<Node> queue;
@@ -116,7 +121,7 @@ public class PathfindingManager {
             scheduler.addWithAutomaticPhasing(queue, 1);
 
             while (true) {
-                scheduler.run(16666);
+                scheduler.run(9999999);
 
                 Iterator<PathFinderRequest> iterator = completedRequestQueue.iterator();
 
@@ -140,14 +145,6 @@ public class PathfindingManager {
             }
 
             PathfindingManager.releasePathfindingThread(this);
-        }
-
-        public void start() {
-            if (thread == null) {
-                thread = new Thread(this);
-                thread.setDaemon(true);
-                thread.start();
-            }
         }
 
         @Override

@@ -81,7 +81,8 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-        Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond());
+        Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond() + " " + Gdx.graphics.getDeltaTime());
+
 		currentTimeMillis = System.currentTimeMillis();
 
         MessageManager.getInstance().update();

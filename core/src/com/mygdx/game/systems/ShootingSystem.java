@@ -1,15 +1,13 @@
 package com.mygdx.game.systems;
 
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.PhysicsShmup;
@@ -23,10 +21,12 @@ import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.managers.BodyGenerator;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
+import com.mygdx.managers.SoundManager;
+import com.sun.xml.internal.ws.dump.LoggingDumpTube;
 
 
 public class ShootingSystem extends IteratingSystem {
-    private Engine engine;
+    private PooledEngine engine;
     private World world;
 
     private ComponentMapper<LookAngleComponent> lookAngleMap    = ComponentMapper.getFor(LookAngleComponent.class);
@@ -34,7 +34,7 @@ public class ShootingSystem extends IteratingSystem {
     private ComponentMapper<SpriteComponent>    spriteMap       = ComponentMapper.getFor(SpriteComponent.class);
 
 
-    public ShootingSystem(Engine engine, World world) {
+    public ShootingSystem(PooledEngine engine, World world) {
         super(Family.all(LookAngleComponent.class, ShootingComponent.class, SpriteComponent.class).get());
         this.engine = engine;
         this.world = world;
@@ -50,13 +50,26 @@ public class ShootingSystem extends IteratingSystem {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             if (PhysicsShmup.currentTimeMillis - lastBulletTime > bulletDelayMillis) {
                 Entity eBullet = new Entity();
-                RenderableComponent renderComponent   = new RenderableComponent();
-                PositionComponent positionComponent = new PositionComponent(sprite.getX() + sprite.getWidth() / 2, sprite.getY() + sprite.getHeight() / 2, 900);
-                SpriteComponent     spriteComponent   = new SpriteComponent(new Texture("Entities/Actors/laser.png"));
-                BulletDamageComponent damageComponent = new BulletDamageComponent(10);
+                RenderableComponent renderComponent = engine.createComponent(RenderableComponent.class);
+
+                PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+                positionComponent.x = sprite.getX() + sprite.getWidth() / 2;
+                positionComponent.y = sprite.getY() + sprite.getHeight() / 2;
+                positionComponent.z = 900;
+
+                SpriteComponent     spriteComponent   = engine.createComponent(SpriteComponent.class);
+                spriteComponent.addTextures(new Texture("Entities/Actors/laser.png"));
+
+                BulletDamageComponent damageComponent = engine.createComponent(BulletDamageComponent.class);
+                damageComponent.damage = 10;
+
                 BulletCollisionComponent bulletColCom = new BulletCollisionComponent();
-                TypeComponent typeComponent     = new TypeComponent(PhysicsManager.COL_FRIENDLY_BULLET);
-                BodyComponent bodyComponent     = new BodyComponent(positionComponent,
+
+                TypeComponent typeComponent     = engine.createComponent(TypeComponent.class);
+                typeComponent.type              = PhysicsManager.COL_FRIENDLY_BULLET;
+
+                BodyComponent bodyComponent     = engine.createComponent(BodyComponent.class);
+                bodyComponent.setBodyAndPosition(positionComponent,
                         BodyGenerator.generateBody(eBullet,
                                 spriteComponent.sprites.first(),
                                 Gdx.files.internal("Entities/BodyDefinitions/Laser.json"),
@@ -76,6 +89,8 @@ public class ShootingSystem extends IteratingSystem {
 
                 engine.addEntity(eBullet);
                 EntityManager.add(eBullet);
+
+                SoundManager.playSoundAtPosition("Sounds/laser.wav", 0.5f, new Vector3(positionComponent.x, positionComponent.y, 0));
             }
         }
     }

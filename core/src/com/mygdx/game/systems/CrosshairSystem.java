@@ -40,9 +40,5 @@ public class CrosshairSystem extends IteratingSystem {
 
         position.x += GameInput.MouseForce.x * 0.7f;
         position.y += GameInput.MouseForce.y * 0.7f;
-
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            SoundManager.playSoundAtPosition("Sounds/laser.wav", 0.5f, new Vector3(position.x, position.y, 0));
-        }
     }
 }

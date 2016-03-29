@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
-import com.badlogic.gdx.ai.msg.MessageDispatcher;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.badlogic.gdx.ai.msg.Telegraph;
@@ -15,6 +14,7 @@ import com.badlogic.gdx.ai.pfa.indexed.IndexedAStarPathFinder;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.ai.steer.behaviors.Flee;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pool.Poolable;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.pathfinding.*;
 import com.mygdx.managers.EntityManager;
@@ -23,7 +23,8 @@ import com.mygdx.managers.Messages;
 import com.mygdx.managers.PathfindingManager;
 
 
-public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable, Pather<Node> {
+
+public class FlyingTestEnemyComponent implements Component, Telegraph, Updateable, Pather<Node>, Poolable {
     public StateMachine<FlyingTestEnemyComponent, FlyingEnemyState> stateMachine;
 
     public boolean isShot = false;
@@ -41,7 +42,13 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
 
     private boolean isRequested = false;
 
+    public FlyingTestEnemyComponent() {}
+
     public FlyingTestEnemyComponent(Entity entity, Steering steering) {
+        construct(entity, steering);
+    }
+
+    public void construct(Entity entity, Steering steering) {
         this.entity = entity;
         this.steering = steering;
         stateMachine = new DefaultStateMachine<>(this, FlyingEnemyState.SEEKING);
@@ -134,5 +141,17 @@ public class FlyingTestEnemyComponent implements Component, Telegraph, Updateabl
             resultPath = (GraphPathImp) request.resultPath;
             Gdx.app.log(this.toString(), "" + resultPath.getCount());
         }
+    }
+
+    @Override
+    public void reset() {
+        stateMachine = null;
+        isShot = false;
+        entity = null;
+        steering = null;
+        waypoint = null;
+        pathFinder = null;
+        resultPath = null;
+        isRequested = false;
     }
 }

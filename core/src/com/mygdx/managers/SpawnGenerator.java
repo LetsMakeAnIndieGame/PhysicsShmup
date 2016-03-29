@@ -2,11 +2,14 @@ package com.mygdx.managers;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.actors.*;
 import com.mygdx.game.components.*;
@@ -29,7 +32,7 @@ public class SpawnGenerator {
     private static World world;
     private static TiledMap tiledMap;
 
-    public static void spawnPlayer(World world, TiledMap tiledMap, Engine engine) {
+    public static void spawnPlayer(World world, TiledMap tiledMap, PooledEngine engine) {
         boolean hasPlayer = false;
 
         MapObjects objects = tiledMap.getLayers().get("SpawnPoints").getObjects();
@@ -44,25 +47,42 @@ public class SpawnGenerator {
                 int spawnPointX = object.getProperties().get("x", float.class).intValue();
                 int spawnPointY = object.getProperties().get("y", float.class).intValue();
 
-                Entity player = new Entity();
+                Entity player = engine.createEntity();
                 PlayerAgent playerAgent = new PlayerAgent(player);
 
                 EntityManager.add(playerAgent);
-                ShootingComponent shootingComponent   = new ShootingComponent();
-                TypeComponent typeComponent       = new TypeComponent(PhysicsManager.COL_PLAYER);
-                PlayerDataComponent playerData          = new PlayerDataComponent();
-                PlayerCollisionComponent playerColCom        = new PlayerCollisionComponent();
-                PositionComponent positionComponent   = new PositionComponent(spawnPointX, spawnPointY, RenderPriority.MID);
-                SpriteComponent spriteComponent     = new SpriteComponent(new Texture("Entities/Actors/player.png"));
-                VelocityComponent velocityComponent   = new VelocityComponent(3f, 0f);
-                BodyComponent bodyComponent       = new BodyComponent(positionComponent,
+                ShootingComponent shootingComponent     = engine.createComponent(ShootingComponent.class);
+
+                TypeComponent typeComponent             = engine.createComponent(TypeComponent.class);
+                typeComponent.type = PhysicsManager.COL_PLAYER;
+
+                PlayerDataComponent playerData          = engine.createComponent(PlayerDataComponent.class);
+                PlayerCollisionComponent playerColCom   = engine.createComponent(PlayerCollisionComponent.class);
+
+                PositionComponent positionComponent     = engine.createComponent(PositionComponent.class);
+                positionComponent.x = spawnPointX;
+                positionComponent.y = spawnPointY;
+                positionComponent.z = RenderPriority.MID;
+
+                SpriteComponent spriteComponent         = engine.createComponent(SpriteComponent.class);
+                spriteComponent.addTextures(new Texture("Entities/Actors/player.png"));
+
+                VelocityComponent velocityComponent     = engine.createComponent(VelocityComponent.class);
+                velocityComponent.x = 3f;
+                velocityComponent.y = 0f;
+
+                BodyComponent bodyComponent             = engine.createComponent(BodyComponent.class);
+                bodyComponent.setBodyAndPosition(positionComponent,
                         BodyGenerator.generateBody(player,
                                 spriteComponent.sprites.get(0),
                                 Gdx.files.internal("Entities/BodyDefinitions/PlayerBody.json"),
                                 PhysicsManager.FRIENDLY_BITS));
-                LookAngleComponent lookAngleComponent  = new LookAngleComponent(90f);
-                RenderableComponent renderableComponent = new RenderableComponent();
-                SensorCollisionComponent sensorColComp  = new SensorCollisionComponent();
+
+                LookAngleComponent lookAngleComponent   = engine.createComponent(LookAngleComponent.class);
+                lookAngleComponent.angle = 90f;
+
+                RenderableComponent renderableComponent = engine.createComponent(RenderableComponent.class);
+                SensorCollisionComponent sensorColComp  = engine.createComponent(SensorCollisionComponent.class);
                 player.add(positionComponent)
                         .add(velocityComponent)
                         .add(spriteComponent)
@@ -77,11 +97,20 @@ public class SpawnGenerator {
                 TestPlayerSteering playerSteering = new TestPlayerSteering(player);
                 EntityManager.add(playerSteering);
 
-                Entity crosshair = new Entity();
-                AttachedComponent attachedComponent  = new AttachedComponent(player);
-                CrosshairComponent crosshairComponent = new CrosshairComponent();
-                positionComponent                     = new PositionComponent(spawnPointX + 150, spawnPointY, RenderPriority.HIGH);
-                spriteComponent                       = new SpriteComponent(new Texture("Entities/Scene2D/crosshair_a.png"));
+                Entity crosshair = engine.createEntity();
+
+                AttachedComponent attachedComponent   = engine.createComponent(AttachedComponent.class);
+                attachedComponent.attachedTo = player;
+
+                CrosshairComponent crosshairComponent = engine.createComponent(CrosshairComponent.class);
+
+                positionComponent                     = engine.createComponent(PositionComponent.class);
+                positionComponent.x = spawnPointX + 150;
+                positionComponent.y = spawnPointY;
+                positionComponent.z = RenderPriority.HIGH;
+
+                spriteComponent                       = engine.createComponent(SpriteComponent.class);
+                spriteComponent.addTextures(new Texture("Entities/Scene2D/crosshair_a.png"));
                 crosshair.add(attachedComponent).add(positionComponent)
                         .add(spriteComponent).add(crosshairComponent)
                         .add(renderableComponent);
@@ -102,7 +131,7 @@ public class SpawnGenerator {
         }
     }
 
-    public static void spawnEnemies(World world, TiledMap tiledMap, Engine engine) {
+    public static void spawnEnemies(World world, TiledMap tiledMap, PooledEngine engine) {
         MapObjects objects = tiledMap.getLayers().get("SpawnPoints").getObjects();
         Iterator<MapObject> objectIterator = objects.iterator();
 
@@ -114,17 +143,30 @@ public class SpawnGenerator {
                 int spawnPointX = object.getProperties().get("x", float.class).intValue();
                 int spawnPointY = object.getProperties().get("y", float.class).intValue();
 
-                Entity enemy = new Entity();
+                Entity enemy = engine.createEntity();
 
-                EnemyCollisionComponent enemyColCom = new EnemyCollisionComponent();
-                EnemyDataComponent enemyDataCom = new EnemyDataComponent();
-                SensorCollisionComponent sensorColComp2 = new SensorCollisionComponent();
-                RenderableComponent renderableComponent = new RenderableComponent();
-                TypeComponent typeComponent = new TypeComponent(PhysicsManager.COL_ENEMY);
-                PositionComponent positionComponent = new PositionComponent(spawnPointX, spawnPointY, RenderPriority.MID);
-                VelocityComponent velocityComponent = new VelocityComponent(0f, 0f);
-                SpriteComponent spriteComponent = new SpriteComponent(new Texture("Entities/Actors/bird.png"));
-                BodyComponent bodyComponent = new BodyComponent(positionComponent,
+                EnemyCollisionComponent enemyColCom     = engine.createComponent(EnemyCollisionComponent.class);
+                EnemyDataComponent enemyDataCom         = engine.createComponent(EnemyDataComponent.class);
+                SensorCollisionComponent sensorColComp2 = engine.createComponent(SensorCollisionComponent.class);
+                RenderableComponent renderableComponent = engine.createComponent(RenderableComponent.class);
+
+                TypeComponent typeComponent             = engine.createComponent(TypeComponent.class);
+                typeComponent.type = PhysicsManager.COL_ENEMY;
+
+                PositionComponent positionComponent     = engine.createComponent(PositionComponent.class);
+                positionComponent.x = spawnPointX;
+                positionComponent.y = spawnPointY;
+                positionComponent.z = RenderPriority.MID;
+
+                VelocityComponent velocityComponent     = engine.createComponent(VelocityComponent.class);
+                velocityComponent.x = 0f;
+                velocityComponent.y = 0f;
+
+                SpriteComponent spriteComponent         = engine.createComponent(SpriteComponent.class);
+                spriteComponent.addTextures(new Texture("Entities/Actors/bird.png"));
+
+                BodyComponent bodyComponent             = engine.createComponent(BodyComponent.class);
+                bodyComponent.setBodyAndPosition(positionComponent,
                         BodyGenerator.generateBody(enemy,
                                 spriteComponent.sprites.get(0),
                                 Gdx.files.internal("Entities/BodyDefinitions/EnemyBody.json"),
@@ -138,16 +180,28 @@ public class SpawnGenerator {
                 enemySteering.setMaxLinearSpeed(2f);
                 enemySteering.setMinLinearSpeed(0.0001f);
 //                enemySteering.setTarget(EntityManager.getPlayerSteering());
-                FlyingTestEnemyComponent enemyAgentComponent = new FlyingTestEnemyComponent(enemy, enemySteering);
+
+                FlyingTestEnemyComponent enemyAgentComponent = engine.createComponent(FlyingTestEnemyComponent.class);
+                enemyAgentComponent.construct(enemy, enemySteering);
+
                 enemy.add(enemyAgentComponent);
 
                 EntityManager.add(enemyAgentComponent);
 
-                Entity healthBar = new Entity();
-                AttachedComponent attachedComponent = new AttachedComponent(enemy);
-                positionComponent = new PositionComponent(0, 0, RenderPriority.MID);
-                HealthBarComponent healthBarComponent = new HealthBarComponent();
-                spriteComponent = new SpriteComponent(new Texture("Entities/Actors/enemyhealthbg.png"), new Texture("Entities/Actors/enemyhealthfg.png"));
+                Entity healthBar = engine.createEntity();
+
+                AttachedComponent attachedComponent = engine.createComponent(AttachedComponent.class);
+                attachedComponent.attachedTo = enemy;
+
+                positionComponent = engine.createComponent(PositionComponent.class);
+                positionComponent.x = 0;
+                positionComponent.y = 0;
+                positionComponent.z = RenderPriority.MID;
+
+                HealthBarComponent healthBarComponent = engine.createComponent(HealthBarComponent.class);
+
+                spriteComponent = engine.createComponent(SpriteComponent.class);
+                spriteComponent.addTextures(new Texture("Entities/Actors/enemyhealthbg.png"), new Texture("Entities/Actors/enemyhealthfg.png"));
 
                 healthBar.add(attachedComponent).add(positionComponent).add(spriteComponent).add(renderableComponent).add(healthBarComponent);
 

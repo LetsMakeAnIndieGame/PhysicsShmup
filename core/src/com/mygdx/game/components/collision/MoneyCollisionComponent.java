@@ -1,22 +1,30 @@
 package com.mygdx.game.components.collision;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.mygdx.game.actors.Collidable;
 import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
+import com.badlogic.gdx.utils.Pool.Poolable;
 
 
-public class MoneyCollisionComponent implements Component, Collidable {
+public class MoneyCollisionComponent implements Component, Collidable, Poolable {
+    public MoneyCollisionComponent() {}
+
     @Override
-    public void handleCollision(Engine engine, Entity collider, Entity collidee) {
+    public void handleCollision(PooledEngine engine, Entity collider, Entity collidee) {
         short type = collidee.getComponent(TypeComponent.class).type;
 
         if (type == PhysicsManager.COL_PLAYER) {
             collider.remove(RenderableComponent.class);
             EntityManager.setToDestroy(collider); // to destroy the body and remove references to this entity
         }
+    }
+
+    @Override
+    public void reset() {
+        // do nothing
     }
 }

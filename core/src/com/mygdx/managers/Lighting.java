@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.utils.Pools;
 
 import java.util.Iterator;
 
@@ -51,6 +52,7 @@ public class Lighting {
 
             if (result == "Point") {
                 light = new PointLight(rayHandler, MAX_RAYS);
+                light = Pools.obtain(PointLight.class);
             } else {
                 light = new PointLight(rayHandler, MAX_RAYS);
             }

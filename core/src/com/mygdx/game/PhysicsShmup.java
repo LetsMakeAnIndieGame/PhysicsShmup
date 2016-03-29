@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
+import box2dLight.PointLight;
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.ai.msg.MessageManager;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,6 +14,9 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Pool;
+import com.badlogic.gdx.utils.Pools;
+import com.badlogic.gdx.utils.ReflectionPool;
 import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.pathfinding.PathfindingDebugger;
 import com.mygdx.game.systems.CollisionManager;
@@ -39,7 +44,7 @@ public class PhysicsShmup extends ApplicationAdapter {
 	public void create () {
         LevelManager.loadLevel("Levels/testlvl.tmx");
 		Gdx.input.setCursorCatched(true); // remove mouse cursor
-		Engine engine = new Engine();
+		PooledEngine engine = new PooledEngine(50, 100, 100, 150);
 
 		input = new GameInput();
 		inputMultiplexer.addProcessor(input);
@@ -81,7 +86,7 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-        Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond() + " " + Gdx.graphics.getDeltaTime());
+//        Gdx.app.log("FPS", "" + Gdx.graphics.getFramesPerSecond() + " " + Gdx.graphics.getDeltaTime());
 
 		currentTimeMillis = System.currentTimeMillis();
 

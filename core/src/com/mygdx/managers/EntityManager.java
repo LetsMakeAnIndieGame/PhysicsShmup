@@ -1,13 +1,16 @@
 package com.mygdx.managers;
 
+
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.PhysicsShmup;
 import com.mygdx.game.actors.*;
 import com.mygdx.game.components.*;
 import com.mygdx.game.components.graphics.RenderableComponent;
@@ -20,7 +23,7 @@ import com.mygdx.game.systems.*;
 
 
 public class EntityManager {
-    private static Engine engine;
+    private static PooledEngine engine;
     private static Entity player;
     private World world;
     private static TestPlayerSteering playerSteering;
@@ -44,14 +47,26 @@ public class EntityManager {
     public static void createBulletHole(Vector2 position, Vector2 normal) {
         Entity bulletHole = new Entity();
 
-        SpriteComponent spriteComponent = new SpriteComponent(new Texture("Entities/Actors/bullethole.png"));
+        SpriteComponent spriteComponent = engine.createComponent(SpriteComponent.class);
+        spriteComponent.addTextures(new Texture("Entities/Actors/bullethole.png"));
+
         Sprite theSprite = spriteComponent.sprites.get(0);
         float offsetX = theSprite.getWidth() / 2 + normal.x * theSprite.getWidth() / 2;
         float offsetY = theSprite.getHeight() / 2 + normal.y * theSprite.getHeight() / 2;
-        PositionComponent positionComponent = new PositionComponent(position.x * PhysicsManager.METERS_TO_PIXELS - offsetX, position.y * PhysicsManager.METERS_TO_PIXELS - offsetY, RenderPriority.LOW);
-        RenderableComponent renderableComponent = new RenderableComponent();
-        DeathTimerComponent deathTimerComponent = new DeathTimerComponent(20000);
-        TransparentComponent transparentComponent = new TransparentComponent(0);
+
+        PositionComponent positionComponent = engine.createComponent(PositionComponent.class);
+        positionComponent.x = position.x * PhysicsManager.METERS_TO_PIXELS - offsetX;
+        positionComponent.y = position.y * PhysicsManager.METERS_TO_PIXELS - offsetY;
+        positionComponent.z = RenderPriority.LOW;
+
+        RenderableComponent renderableComponent = engine.createComponent(RenderableComponent.class);
+
+        DeathTimerComponent deathTimerComponent = engine.createComponent(DeathTimerComponent.class);
+        deathTimerComponent.createTime = PhysicsShmup.currentTimeMillis;
+        deathTimerComponent.deathTime = 20000;
+
+        TransparentComponent transparentComponent = engine.createComponent(TransparentComponent.class);
+        transparentComponent.transparency = 0;
 
         bulletHole.add(positionComponent).add(renderableComponent).add(spriteComponent).add(deathTimerComponent).add(transparentComponent);
 
@@ -59,7 +74,7 @@ public class EntityManager {
         EntityManager.add(bulletHole);
     }
 
-    public EntityManager(World world, Engine e, SpriteBatch batch) {
+    public EntityManager(World world, PooledEngine e, SpriteBatch batch) {
         engine = e;
         this.world = world;
 

@@ -1,28 +1,15 @@
 package com.mygdx.game.systems;
 
 import com.badlogic.ashley.core.*;
-import com.badlogic.ashley.systems.IteratingSystem;
-import com.badlogic.ashley.utils.ImmutableArray;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.mygdx.game.components.DeathTimerComponent;
 import com.mygdx.game.components.collision.*;
-import com.mygdx.game.components.graphics.RenderableComponent;
-import com.mygdx.game.components.graphics.SpriteComponent;
-import com.mygdx.game.components.graphics.TransparentComponent;
-import com.mygdx.game.components.physics.BodyComponent;
-import com.mygdx.game.components.physics.PositionComponent;
 import com.mygdx.game.components.states.*;
 import com.mygdx.managers.EntityManager;
-import com.mygdx.managers.GameInput;
 import com.mygdx.managers.PhysicsManager;
-import com.mygdx.managers.RenderPriority;
 
 public class CollisionManager implements ContactListener {
-    private Engine engine;
+    private PooledEngine engine;
 
     private ComponentMapper<SensorCollisionComponent>   sensorColMap    = ComponentMapper.getFor(SensorCollisionComponent.class);
     private ComponentMapper<TypeComponent>              typeMap         = ComponentMapper.getFor(TypeComponent.class);
@@ -62,7 +49,7 @@ public class CollisionManager implements ContactListener {
             enemyColMap.get(b).handleCollision(engine, b, a);
     }
 
-    public CollisionManager(Engine engine, World world) {
+    public CollisionManager(PooledEngine engine, World world) {
         this.engine = engine;
         world.setContactListener(this);
     }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.components.physics.PositionComponent;
@@ -108,17 +109,21 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 		tiledMapRenderer.setView(camera);
 
-		ShaderProgram shader = new ShaderProgram(Gdx.files.internal("Shaders/VertexShader.glsl"),
-				Gdx.files.internal("Shaders/FragmentShader.glsl"));
+		ShaderProgram shader = new ShaderProgram(Gdx.files.internal("Shaders/BasicLightingVertex.glsl"),
+				Gdx.files.internal("Shaders/BasicLightingFragment.glsl"));
 
 		shader.begin();
+
 		shader.setUniformMatrix("u_worldView", camera.combined);
-		shader.setUniformf("u_color", Color.WHITE);
+		shader.setUniformf("u_lightPos", new Vector2(EntityManager.getPlayer().getComponent(PositionComponent.class).x,
+				EntityManager.getPlayer().getComponent(PositionComponent.class).y));
+		shader.setUniformf("u_lightColor", new Vector3(0,1,0));
+		Gdx.app.log("Is Compiled", "" + shader.isCompiled() + " Log: " + shader.getLog());
 		tiledMapRenderer.getBatch().setShader(shader);
 
 		tiledMapRenderer.render();
-
 		tiledMapRenderer.getBatch().setShader(null);
+
 		shader.end();
 
         camera.position.x = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).x, width / 2), LevelManager.lvlPixelWidth - (width / 2));

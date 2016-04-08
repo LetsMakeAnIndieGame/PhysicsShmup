@@ -31,24 +31,8 @@ public class SpriteRenderSystem extends SortedIteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         for (Sprite sprite : spriteMap.get(entity).sprites) {
-            if (entity == EntityManager.getPlayer()) {
-                ShaderProgram shader = new ShaderProgram(Gdx.files.internal("Shaders/VertexShader.glsl"),
-                        Gdx.files.internal("Shaders/FragmentShader.glsl"));
-
-                shader.begin();
-                shader.setUniformMatrix("u_worldView", batch.getProjectionMatrix());
-                shader.setUniformf("u_color", Color.RED);
-                batch.setShader(shader);
-
-                sprite.draw(batch);
-
-                batch.setShader(null);
-                shader.end();
-
-            } else {
-                batch.setShader(null);
-                sprite.draw(batch);
-            }
+            batch.setShader(null);
+            sprite.draw(batch);
         }
 
 //        batch.draw(sprite.getTexture(), sprite.getX(), sprite.getY(), sprite.getWidth() / 2, sprite.getHeight() / 2, sprite.getWidth(), sprite.getHeight(), 1, 1, sprite.getRotation(), 0, 0, (int) sprite.getWidth(), (int) sprite.getHeight(), isLeft, false);

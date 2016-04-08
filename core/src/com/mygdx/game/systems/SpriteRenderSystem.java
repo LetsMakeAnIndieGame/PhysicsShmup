@@ -1,13 +1,18 @@
 package com.mygdx.game.systems;
 
-import com.badlogic.ashley.core.*;
-import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.ashley.core.ComponentMapper;
+import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.mygdx.game.components.graphics.RenderableComponent;
 import com.mygdx.game.components.graphics.SpriteComponent;
 import com.mygdx.game.components.physics.PositionComponent;
+import com.mygdx.managers.EntityManager;
 
 import javax.swing.text.Position;
 import java.util.Comparator;
@@ -26,7 +31,24 @@ public class SpriteRenderSystem extends SortedIteratingSystem {
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
         for (Sprite sprite : spriteMap.get(entity).sprites) {
-            sprite.draw(batch);
+            if (entity == EntityManager.getPlayer()) {
+                ShaderProgram shader = new ShaderProgram(Gdx.files.internal("Shaders/VertexShader.glsl"),
+                        Gdx.files.internal("Shaders/FragmentShader.glsl"));
+
+                shader.begin();
+                shader.setUniformMatrix("u_worldView", batch.getProjectionMatrix());
+                shader.setUniformf("u_color", Color.RED);
+                batch.setShader(shader);
+
+                sprite.draw(batch);
+
+                batch.setShader(null);
+                shader.end();
+
+            } else {
+                batch.setShader(null);
+                sprite.draw(batch);
+            }
         }
 
 //        batch.draw(sprite.getTexture(), sprite.getX(), sprite.getY(), sprite.getWidth() / 2, sprite.getHeight() / 2, sprite.getWidth(), sprite.getHeight(), 1, 1, sprite.getRotation(), 0, 0, (int) sprite.getWidth(), (int) sprite.getHeight(), isLeft, false);

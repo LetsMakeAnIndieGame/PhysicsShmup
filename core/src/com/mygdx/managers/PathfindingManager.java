@@ -30,7 +30,7 @@ public class PathfindingManager {
     private ExecutorService executor;
 
     private PathfindingManager() {
-        activeThreads = new CopyOnWriteArrayList<>();
+        activeThreads = new CopyOnWriteArrayList<PathfindingThread>();
         threadCount = Runtime.getRuntime().availableProcessors();
 
         threadCount--;
@@ -94,14 +94,14 @@ public class PathfindingManager {
         public PathfindingThread(IndexedAStarPathFinder<Node> pathFinder) {
             this.pathFinder = pathFinder;
 
-            requestMap = new ConcurrentHashMap<>();
-            completedRequestQueue = new CopyOnWriteArrayList<>();
+            requestMap = new ConcurrentHashMap<PathFinderRequest<Node>, Pather>();
+            completedRequestQueue = new CopyOnWriteArrayList<PathFinderRequest>();
 
             scheduler = new LoadBalancingScheduler(60);
 
             dispatcher = new MessageDispatcher();
 
-            queue = new PathFinderQueue<>(pathFinder);
+            queue = new PathFinderQueue<Node>(pathFinder);
             dispatcher.addListener(queue, Messages.REQUEST_PATHFINDING);
         }
 
@@ -110,7 +110,7 @@ public class PathfindingManager {
 
             requestDispatcher.addListener(this, Messages.PATHFINDING_FINISHED);
 
-            PathFinderRequest<Node> request = new PathFinderRequest<>(startNode, endNode,
+            PathFinderRequest<Node> request = new PathFinderRequest<Node>(startNode, endNode,
                     new FlyingHeuristic(), new GraphPathImp(), requestDispatcher);
             request.responseMessageCode = Messages.PATHFINDING_FINISHED;
 

@@ -22,7 +22,6 @@ import com.mygdx.managers.BodyGenerator;
 import com.mygdx.managers.EntityManager;
 import com.mygdx.managers.PhysicsManager;
 import com.mygdx.managers.SoundManager;
-import com.sun.xml.internal.ws.dump.LoggingDumpTube;
 
 
 public class ShootingSystem extends IteratingSystem {

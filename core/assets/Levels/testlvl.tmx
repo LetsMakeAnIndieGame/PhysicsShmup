@@ -116,7 +116,14 @@
    <polygon points="0,0 -96,86 -110,-18"/>
   </object>
  </objectgroup>
- <objectgroup name="Lighting"/>
+ <objectgroup name="Lighting">
+  <object x="1054" y="731" width="48" height="43">
+   <properties>
+    <property name="Distance" value="30"/>
+    <property name="Type" value="Point"/>
+   </properties>
+  </object>
+ </objectgroup>
  <objectgroup name="SpawnPoints">
   <object gid="29" x="1247" y="699">
    <properties>

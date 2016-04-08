@@ -11,8 +11,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.mygdx.game.pathfinding.PathfindingDebugger;
 import com.mygdx.managers.PhysicsManager;
 
-import java.math.BigDecimal;
-
 public class AirbornSteering extends Steering implements Steerable<Vector2>, Updateable {
     public AirbornSteering(Vector2 position) {
         this.position = position;

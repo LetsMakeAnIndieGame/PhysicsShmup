@@ -1,8 +1,10 @@
 package com.mygdx.managers;
 
+import box2dLight.DirectionalLight;
 import box2dLight.Light;
 import box2dLight.PointLight;
 import box2dLight.RayHandler;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -42,6 +44,7 @@ public class Lighting {
         MapObjects objects = tiledMap.getLayers().get("Lighting").getObjects();
         Iterator<MapObject> objectIterator = objects.iterator();
 
+
         while(objectIterator.hasNext() && numLights < MAX_LIGHTS) {
             Light light;
             MapObject object = objectIterator.next();
@@ -50,9 +53,9 @@ public class Lighting {
             // PointLight, DirectionalLight, PositionalLight, ChainLight, ConeLight
             result = (String) object.getProperties().get("Type");
 
-            if (result == "Point") {
+            if (result.equals("Point")) {
                 light = new PointLight(rayHandler, MAX_RAYS);
-                light = Pools.obtain(PointLight.class);
+                light = new DirectionalLight(rayHandler, 1000, Color.CYAN, 90);
             } else {
                 light = new PointLight(rayHandler, MAX_RAYS);
             }

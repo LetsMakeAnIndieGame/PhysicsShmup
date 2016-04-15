@@ -1,22 +1,19 @@
 package com.mygdx.game;
 
-import box2dLight.PointLight;
-import box2dLight.RayHandler;
+
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.ai.msg.MessageManager;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.components.physics.PositionComponent;
@@ -43,6 +40,9 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 	public static InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
+	private FrameBuffer frameBuffer;
+	private TextureRegion bufferTexture;
+
 	@Override
 	public void create () {
         LevelManager.loadLevel("Levels/testlvl.tmx");
@@ -65,8 +65,8 @@ public class PhysicsShmup extends ApplicationAdapter {
 		height = Gdx.graphics.getHeight();
 
 		camera = new OrthographicCamera();
-		camera.setToOrtho(false, width, height);
-		camera.update();
+		camera.setToOrtho(false);
+//		camera.update();
 
         SoundManager.setCamera(camera);
         PathfindingDebugger.setCamera(camera);
@@ -86,6 +86,32 @@ public class PhysicsShmup extends ApplicationAdapter {
 
         SpawnGenerator.spawnPlayer(world, LevelManager.tiledMap, engine);
         SpawnGenerator.spawnEnemies(world, LevelManager.tiledMap, engine);
+
+		frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, 1280, 720, false);
+		bufferTexture = new TextureRegion(frameBuffer.getColorBufferTexture());
+	}
+
+	private void renderFBO() {
+		frameBuffer.begin();
+
+		Gdx.gl.glClearColor(0f,0f,0f,1f);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		batch.begin();
+		batch.setColor(Color.CYAN);
+
+		camera.setToOrtho(true);
+		camera.position.x = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).x, width / 2), LevelManager.lvlPixelWidth - (width / 2));
+		camera.position.y = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).y, height / 2), LevelManager.lvlPixelHeight - (height / 2));
+		camera.update();
+
+		tiledMapRenderer.setView(camera);
+		tiledMapRenderer.render();
+
+		frameBuffer.end();
+		batch.end();
+
+		camera.setToOrtho(false);
 	}
 
 	@Override
@@ -99,7 +125,7 @@ public class PhysicsShmup extends ApplicationAdapter {
 
 		Matrix4 debugMatrix = batch.getProjectionMatrix().cpy().scale(PhysicsManager.METERS_TO_PIXELS, PhysicsManager.METERS_TO_PIXELS, 0);
 
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 0f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -107,35 +133,32 @@ public class PhysicsShmup extends ApplicationAdapter {
 		GameInput.staticUpdate();
 		Time.update();
 
+		camera.position.x = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).x, width / 2), LevelManager.lvlPixelWidth - (width / 2));
+		camera.position.y = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).y, height / 2), LevelManager.lvlPixelHeight - (height / 2));
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
+
 		tiledMapRenderer.setView(camera);
-
-		ShaderProgram shader = new ShaderProgram(Gdx.files.internal("Shaders/BasicLightingVertex.glsl"),
-				Gdx.files.internal("Shaders/BasicLightingFragment.glsl"));
-
-		shader.begin();
-
-		shader.setUniformMatrix("u_worldView", camera.combined);
-		shader.setUniformf("u_lightPos", new Vector2(EntityManager.getPlayer().getComponent(PositionComponent.class).x,
-				EntityManager.getPlayer().getComponent(PositionComponent.class).y));
-		shader.setUniformf("u_lightColor", new Vector3(0,1,0));
-		Gdx.app.log("Is Compiled", "" + shader.isCompiled() + " Log: " + shader.getLog());
-		tiledMapRenderer.getBatch().setShader(shader);
-
 		tiledMapRenderer.render();
-		tiledMapRenderer.getBatch().setShader(null);
 
-		shader.end();
+		renderFBO();
 
-        camera.position.x = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).x, width / 2), LevelManager.lvlPixelWidth - (width / 2));
-        camera.position.y = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).y, height / 2), LevelManager.lvlPixelHeight - (height / 2));
-        camera.update();
+		batch.setProjectionMatrix(camera.combined);
+		batch.begin();
+		batch.draw(bufferTexture.getTexture(), 50, 50, 444, 250);
+		batch.end();
+
+		camera.position.x = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).x, width / 2), LevelManager.lvlPixelWidth - (width / 2));
+		camera.position.y = Math.min(Math.max(EntityManager.getPlayer().getComponent(PositionComponent.class).y, height / 2), LevelManager.lvlPixelHeight - (height / 2));
+		camera.update();
+		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
-		entityManager.update(); // this may draw entities hence batch.begin() {...} batch.end()
+		entityManager.update(); // this may draw entities hence batch.begin() {...} batch.end() // TODO: Resolve this issue
         EntityManager.update(world); // static update for adding and removing entities
         // Do this update last or you'll have problems
         input.update();
-		batch.setProjectionMatrix(camera.combined);
+//		batch.setProjectionMatrix(camera.combined);
 //		EntityManager.draw(batch);
 		batch.end();
 

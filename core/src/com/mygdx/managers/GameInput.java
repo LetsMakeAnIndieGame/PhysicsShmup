@@ -59,6 +59,10 @@ public class GameInput implements InputProcessor {
         return true;
     }
 
+    public static Vector2 getMousePos() {
+        return oldMousePos;
+    }
+
     @Override
     public boolean keyUp(int keycode) {
         return false;

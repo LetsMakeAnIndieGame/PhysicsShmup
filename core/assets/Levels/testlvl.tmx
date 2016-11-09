@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-up" width="60" height="60" tilewidth="50" tileheight="50" backgroundcolor="#000000">
- <tileset firstgid="1" name="PngOutTest" tilewidth="50" tileheight="50">
+<map version="1.0" orientation="orthogonal" renderorder="right-up" width="60" height="60" tilewidth="50" tileheight="50" backgroundcolor="#000000" nextobjectid="22">
+ <tileset firstgid="1" name="PngOutTest" tilewidth="50" tileheight="50" tilecount="28" columns="7">
   <image source="pngouttest.png" width="350" height="200"/>
   <tile id="14">
    <properties>
@@ -75,61 +75,66 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="29" name="Spawn" tilewidth="50" tileheight="50">
+ <tileset firstgid="29" name="Spawn" tilewidth="50" tileheight="50" tilecount="2" columns="2">
   <image source="spawn.png" width="100" height="50"/>
  </tileset>
- <tileset firstgid="31" name="PaddingTest" tilewidth="48" tileheight="48" spacing="2" margin="2">
+ <tileset firstgid="31" name="PaddingTest" tilewidth="48" tileheight="48" spacing="2" margin="2" tilecount="2" columns="2">
   <image source="spawn.png" width="100" height="50"/>
  </tileset>
- <layer name="Tile Layer 1" width="60" height="60">
+ <layer name="Background" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJztw8EJAAAMA6F7Zv+Ju0dRcNVUVVVVVVVVVVVVVVVV1VcP4rNwgQ==
+  </data>
+ </layer>
+ <layer name="Foreground" width="60" height="60">
   <data encoding="base64" compression="zlib">
    eJztmNsOgjAQRJf4wpuKd/T/v1Mb27iZdIUEaheZSU6ESpoet8KGVkRaeaf9c9bgSAhZL7uC1HZDHvLJJjImeG1jfH9/cVbUdD0MrN8iF2s8pHPgmnyTo3YdU+cGPq1snPriGrXXtzoP+Ur0re2qfRHtajk1cIx7Xc/jyRfXhudYy5xn7jfQ83jzzXnmMrR3sb7efAN74BLX2MO5wHgOfe1WHXvxDfdM7A+ucY03OBcYR8Jc+v+Rats78LT285R0xnxealvCN8yp97Sn2pbyPcDYeQL09eWr71n0pS99l+Ob60+s3mSIJfjOGf1OZA2+ISX6Mvr6CX3pS1/6asLz7fRLiZE5Spl+Iz3TrfdRtSjVX03pbX/BmlzpS1/60ndJzvSlL33pS1+f0Je+9KUvff0xtyshhHgipfY6SvMEz8SRbA==
   </data>
  </layer>
  <objectgroup name="CollisionLayer">
-  <object x="1450" y="851" width="149" height="398"/>
-  <object x="1150" y="700" width="398" height="98"/>
-  <object x="1450" y="796" width="98" height="61"/>
-  <object x="852" y="703" width="143" height="93"/>
-  <object x="343" y="703" width="455" height="95"/>
-  <object x="344" y="339" width="205" height="369"/>
-  <object x="1803" y="341" width="76" height="517"/>
-  <object x="1751" y="751" width="171" height="268"/>
-  <object x="1699" y="851" width="315" height="397"/>
-  <object x="1796" y="1037" width="945" height="211"/>
-  <object x="2448" y="1206" width="181" height="584"/>
-  <object x="545" y="1702" width="1973" height="88"/>
-  <object x="341" y="793" width="207" height="928"/>
-  <object x="605" y="1701">
+  <object id="1" x="1450" y="851" width="149" height="398"/>
+  <object id="2" x="1150" y="700" width="398" height="98"/>
+  <object id="3" x="1450" y="796" width="98" height="61"/>
+  <object id="4" x="852" y="703" width="143" height="93"/>
+  <object id="5" x="343" y="703" width="455" height="95"/>
+  <object id="6" x="344" y="339" width="205" height="369"/>
+  <object id="7" x="1803" y="341" width="76" height="517"/>
+  <object id="8" x="1751" y="751" width="171" height="268"/>
+  <object id="9" x="1699" y="851" width="315" height="397"/>
+  <object id="10" x="1796" y="1037" width="945" height="211"/>
+  <object id="11" x="2448" y="1206" width="181" height="584"/>
+  <object id="12" x="545" y="1702" width="1973" height="88"/>
+  <object id="13" x="341" y="793" width="207" height="928"/>
+  <object id="14" x="605" y="1701">
    <polygon points="0,0 -79,-77 -94,81"/>
   </object>
-  <object x="2382" y="1707">
+  <object id="15" x="2382" y="1707">
    <polygon points="0,0 86,-77 139,40"/>
   </object>
-  <object x="2454" y="1301">
+  <object id="16" x="2454" y="1301">
    <polygon points="0,0 -72,-72 82,-88"/>
   </object>
-  <object x="1810" y="409">
+  <object id="17" x="1810" y="409">
    <polygon points="0,0 -84,-81 15,-98"/>
   </object>
-  <object x="621" y="337">
+  <object id="18" x="621" y="337">
    <polygon points="0,0 -96,86 -110,-18"/>
   </object>
  </objectgroup>
  <objectgroup name="Lighting"/>
  <objectgroup name="SpawnPoints">
-  <object gid="29" x="1247" y="699">
+  <object id="19" gid="29" x="1247" y="699" width="50" height="50">
    <properties>
     <property name="toSpawn" value="Player"/>
    </properties>
   </object>
-  <object gid="30" x="1500" y="530">
+  <object id="20" gid="30" x="1500" y="530" width="50" height="50">
    <properties>
     <property name="steering" value="FlyingSteering"/>
     <property name="toSpawn" value="Basic"/>
    </properties>
   </object>
-  <object gid="30" x="1011" y="1701">
+  <object id="21" gid="30" x="1011" y="1701" width="50" height="50">
    <properties>
     <property name="steering" value="FlyingSteering"/>
     <property name="toSpawn" value="Basic"/>

@@ -88,7 +88,7 @@
  </layer>
  <layer name="Foreground" width="60" height="60">
   <data encoding="base64" compression="zlib">
-   eJztmNsOgjAQRJf4wpuKd/T/v1Mb27iZdIUEaheZSU6ESpoet8KGVkRaeaf9c9bgSAhZL7uC1HZDHvLJJjImeG1jfH9/cVbUdD0MrN8iF2s8pHPgmnyTo3YdU+cGPq1snPriGrXXtzoP+Ur0re2qfRHtajk1cIx7Xc/jyRfXhudYy5xn7jfQ83jzzXnmMrR3sb7efAN74BLX2MO5wHgOfe1WHXvxDfdM7A+ucY03OBcYR8Jc+v+Rats78LT285R0xnxealvCN8yp97Sn2pbyPcDYeQL09eWr71n0pS99l+Ob60+s3mSIJfjOGf1OZA2+ISX6Mvr6CX3pS1/6asLz7fRLiZE5Spl+Iz3TrfdRtSjVX03pbX/BmlzpS1/60ndJzvSlL33pS1+f0Je+9KUvff0xtyshhHgipfY6SvMEz8SRbA==
+   eJztmNsOgjAMhusddyooKvr+z6mLLDZNyyEwVtzf5Etkp/RzAxoqIqroG9WfU4IjAKBcTgnJ7SZ50S8OPVNCjpXzYv/zQ8vI6dqM5G9h+VtRO3CNvjFPzXUotHnWOI++mgt3t/Z5yvmvHbhyX+u8DjlZ/4nW78lX87HOtnWPj83z5qvlq8Wcfo++gbPg1ufYiWsS7Rp87JH99uIbnpmyPrj3OT7ENYl2SViL3x9xbzsHntZ5XhK1sZ6XvU3hG9bkZ9rT3qbybURbuwD4+vLlzyz4whe++/HV6hOrNhljD75rBv8mUoJviBR1GXz9BHzhC1/4csL77bqlxMS4UJp6I77Tre9RuUhVXy2pbbegJFf4whe+8N2TM3zhC1/4wtcn8IUvfOELX3+s7QoAAJ6IkTuP1LwBdyKRMw==
   </data>
  </layer>
  <objectgroup name="CollisionLayer">
